@@ -1,11 +1,19 @@
-import { useEffect,useState } from "react";
-import { access_token,logout } from './spotify'
+import { useEffect, useState } from "react";
+import { accessToken, logout, getCurrentUserProfile } from "./spotify";
+import { catchErrors } from "./utils";
 function App() {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
+  const [profile, setProfile] = useState(null);
   useEffect(() => {
-    setToken(access_token)
+    setToken(accessToken);
+    const fetchData = async () => {
+      const response = await getCurrentUserProfile();
+      setProfile(response.data);
+      console.log(response.data);
+    };
+    catchErrors(fetchData());
   }, []);
-console.log(Date.now());
+  console.log('access token',accessToken );
   return (
     <div className="App text-4xl text-red-600">
       <a href="http://localhost:8000/login">log in to spotify</a>
