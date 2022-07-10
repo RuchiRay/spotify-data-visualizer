@@ -38,6 +38,9 @@ const refreshToken = async () => {
     ) {
       console.error("no refresh token found");
       logout();
+    }
+    else
+    {
       const { data } = await axios.get(
         `/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`
       );
@@ -46,11 +49,16 @@ const refreshToken = async () => {
         data.access_token
       );
       window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
-      window.location.reload();
+      reloadPage()
     }
   } catch (error) {
     console.error(error);
   }
+};
+
+const reloadPage = () => {
+  console.log("page reloaded");
+  window.location.reload();
 };
 
 const getAccessTokens = () => {
@@ -102,8 +110,7 @@ axios.defaults.baseURL = "https://api.spotify.com/v1";
 axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";
 
-
 export const getCurrentUserProfile = () => {
-  console.log('from spotify',axios.defaults.headers["Authorization"]);
- return axios.get("/me");
-}
+  console.log("from spotify", axios.defaults.headers["Authorization"]);
+  return axios.get("/me");
+};
