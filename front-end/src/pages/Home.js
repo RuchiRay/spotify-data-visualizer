@@ -7,7 +7,7 @@ import { GiMusicalScore, GiMicrophone } from "react-icons/gi";
 import { logout } from "../spotify";
 const Home = () => {
   return (
-    <div className="flex text-gray-400">
+    <div className="flex w-full text-gray-400">
       <div className="bg-black h-screen min-h-[550px] flex flex-col items-center justify-between py-8 w-28  sticky shrink-0 top-0 left-0 text-sm">
         <div>
           <BsSpotify className="text-green-500 text-6xl" />
@@ -90,7 +90,7 @@ const Home = () => {
           <button  onClick={logout}>LOGOUT</button>
         </div>
       </div>
-      <div>
+      <div className="w-full">
         <Outlet />
       </div>
     </div>
