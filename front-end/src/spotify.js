@@ -62,7 +62,6 @@ const reloadPage = () => {
 };
 
 const getAccessTokens = () => {
-  console.log("get access token function running");
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const queryParams = {
@@ -111,6 +110,22 @@ axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";
 
 export const getCurrentUserProfile = () => {
-  console.log("from spotify", axios.defaults.headers["Authorization"]);
   return axios.get("/me");
 };
+
+export const getFollowingArtist = ()=>{
+  return axios.get('/me/following?type=artist')
+}
+
+export const getUserPlaylists = ()=>{
+  return axios.get('/me/playlists')
+}
+export const getUserEpisodes = ()=>{
+  return axios.get('/me/episodes')
+}
+export const getUserAlbums = ()=>{
+  return axios.get('/me/albums')
+}
+export const getUserTracks = ()=>{
+  return axios.get('/me/tracks')
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { BsSpotify } from "react-icons/bs";
+import { BsSpotify,BsFillEmojiHeartEyesFill,BsFillHeartFill } from "react-icons/bs";
 import { FaUser, FaMusic } from "react-icons/fa";
 import { BiTime } from "react-icons/bi";
 import { GiMusicalScore, GiMicrophone } from "react-icons/gi";
@@ -10,9 +10,9 @@ const Home = () => {
     <div className="flex w-full text-gray-400">
       <div className="bg-black h-screen min-h-[550px] flex flex-col items-center justify-between py-8 w-28  sticky shrink-0 top-0 left-0 text-sm">
         <div>
-          <BsSpotify className="text-green-500 text-6xl" />
+          <BsSpotify className="text-green-500 text-5xl" />
         </div>
-        <div className="flex flex-col gap-2 w-full items-center">
+        <div className="flex flex-col text-xs  w-full items-center">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -85,12 +85,40 @@ const Home = () => {
             </div>
             <p>Recent</p>
           </NavLink>
+          <NavLink
+            to="artists-following"
+            className={({ isActive }) =>
+            ` flex flex-col items-center justify-center w-20 h-20 ${
+              isActive &&
+              "bg-[#181818] border-b-6 border-b-green-500 rounded-md text-white"
+            }`
+          }
+          >
+            <div className="text-2xl pb-1">
+              <BsFillEmojiHeartEyesFill />
+            </div>
+            <p className="text-center">Artist Following</p>
+          </NavLink>
+          <NavLink
+            to="liked-songs"
+            className={({ isActive }) =>
+            ` flex flex-col items-center justify-center w-20 h-20 ${
+              isActive &&
+              "bg-[#181818] border-b-6 border-b-green-500 rounded-md text-white"
+            }`
+          }
+          >
+            <div className="text-2xl pb-1">
+              <BsFillHeartFill />
+            </div>
+            <p className="text-center">Liked Songs</p>
+          </NavLink>
         </div>
         <div>
           <button  onClick={logout}>LOGOUT</button>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full p-16">
         <Outlet />
       </div>
     </div>

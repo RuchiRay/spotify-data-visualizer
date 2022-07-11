@@ -10,6 +10,8 @@ import {
   Recent,
   TopArtists,
   TopTracks,
+  ArtistFollowing,
+  LikedSongs,
 } from "./pages";
 function App() {
   const [token, setToken] = useState(null);
@@ -26,6 +28,8 @@ function App() {
           <Route path="recent" element={<Recent />} />
           <Route path="top-artists" element={<TopArtists />} />
           <Route path="top-tracks" element={<TopTracks />} />
+          <Route path="artists-following" element={<ArtistFollowing />} />
+          <Route path="liked-songs" element={<LikedSongs />} />
         </Route>
       </Routes>
     </BrowserRouter>
