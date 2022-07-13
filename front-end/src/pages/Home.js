@@ -8,7 +8,7 @@ import { logout } from "../spotify";
 const Home = () => {
   return (
     <div className="flex w-full text-gray-400">
-      <div className="bg-black h-screen min-h-[550px] flex flex-col items-center justify-between py-8 w-28  sticky shrink-0 top-0 left-0 text-sm">
+      <div className="bg-black h-screen min-h-[650px] flex flex-col items-center justify-between py-8 w-28  sticky shrink-0 top-0 left-0 text-sm">
         <div>
           <BsSpotify className="text-green-500 text-5xl" />
         </div>

@@ -129,3 +129,10 @@ export const getUserAlbums = ()=>{
 export const getUserTracks = ()=>{
   return axios.get('/me/tracks')
 }
+export const getTopTracks = (time_range='short_term',limit=5)=>{
+  return axios.get(`/me/top/tracks?limit=${limit}&time_range=${time_range}`)
+}
+export const getTopArtists = (time_range='short_term',limit=5)=>{
+  return axios.get(`/me/top/artists?limit=${limit}&time_range=${time_range}`)
+
+}
