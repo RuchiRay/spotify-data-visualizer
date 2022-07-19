@@ -9,6 +9,7 @@ import {
   getUserTracks,
   getTopArtists,
   getTopTracks,
+  getMorePlaylists
 } from "../spotify";
 import { catchErrors, formatTime } from "../utils";
 import { Link } from "react-router-dom";
@@ -33,6 +34,7 @@ const Profile = () => {
       const userTracks = await getUserTracks();
       const userTopTracks = await getTopTracks("short_term", 4);
       const userTopArtists = await getTopArtists();
+      const morePlaylists = await getMorePlaylists(user.data.id)
       setPlaylists(userPlaylists.data);
       setProfile(user.data);
       setFollowing(followingArtists.data.artists.total);
@@ -46,7 +48,7 @@ const Profile = () => {
     };
     catchErrors(fetchData());
   }, []);
-  console.log(topTracks);
+ 
   if (isLoading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -105,8 +107,8 @@ const Profile = () => {
           <div className=" bg-[#3F305E]  border-2 border-purple-400 w-48 h-32"></div>
           <div className=" bg-[#214258]  border-2 border-blue-400 w-48 h-32"></div> */}
         </div>
-        <div className="flex mt-16 gap-8 justify-between w-full">
-          <div className="w-[500px] shrink-0  py-6 px-8">
+        <div className="flex mt-16 gap-16 justify-between w-full">
+          <div className="w-[500px] shrink-0  ">
             <div className="flex mb-8 text-gray-100 justify-between items-center w-full">
               <p className="text-2xl  font-medium">Top artists this month</p>
               <Link
@@ -121,7 +123,8 @@ const Profile = () => {
                 const { id, images, name } = item;
                 return (
                   <div
-                    className="flex py-3 px-4 hover:bg-[#181818] text-gray-200  items-center cursor-pointer"
+                    className="flex py-3 px-4 hover:bg-black/40 text-gray-200  items-center cursor-pointer"
+                    
                     key={id}
                   >
                     <div className="w-16 h-16">
@@ -143,7 +146,7 @@ const Profile = () => {
               })}
             </div>
           </div>
-          <div className="w-full py-6 px-8">
+          <div className="w-full">
             <div className="flex mb-8 text-gray-100 justify-between items-center w-full">
               <p className="text-2xl  font-medium">Top tracks this month</p>
               <Link
@@ -158,7 +161,7 @@ const Profile = () => {
                 const { album, artists, duration_ms, id, name } = item;
                 return (
                   <div
-                    className="flex justify-between py-3 px-4 hover:bg-[#181818] text-gray-200  items-center cursor-pointer"
+                    className="flex justify-between py-3 px-4 hover:bg-black/40 text-gray-200  items-center cursor-pointer"
                     key={id}
                   >
                     <div className="flex items-center">
@@ -187,6 +190,24 @@ const Profile = () => {
               })}
             </div>
           </div>
+        </div>
+        <div className="w-full ">
+          <div className="flex w-full">
+            <p className="text-2xl font-medium text-gray-100">Playlists</p>
+          </div>
+         <div className="flex gap-5 mt-10">
+         {
+          playlists.items.map((item)=>{
+            const {id,images,name} = item
+            return <div key={id} className='bg-black/40 w-56 h-72 p-4'>
+               <div>
+                <img src={images[0].url} alt="" />
+               </div>
+               <p className="mt-4 text-gray-200">{name}</p>
+            </div>
+          })
+         }
+         </div>
         </div>
       </div>
     </div>

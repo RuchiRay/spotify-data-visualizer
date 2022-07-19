@@ -120,6 +120,9 @@ export const getFollowingArtist = ()=>{
 export const getUserPlaylists = ()=>{
   return axios.get('/me/playlists')
 }
+export const getMorePlaylists = (userId)=>{
+  return axios.get(`/users/${userId}/playlists`)
+}
 export const getUserEpisodes = ()=>{
   return axios.get('/me/episodes')
 }
