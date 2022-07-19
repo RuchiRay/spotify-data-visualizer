@@ -195,11 +195,11 @@ const Profile = () => {
           <div className="flex w-full">
             <p className="text-2xl font-medium text-gray-100">Playlists</p>
           </div>
-         <div className="flex gap-5 mt-10">
+         <div className="flex flex-wrap gap-5 mt-10">
          {
           playlists.items.map((item)=>{
             const {id,images,name} = item
-            return <div key={id} className='bg-black/40 w-56 h-72 p-4'>
+            return <div key={id} className='bg-black/40 w-56  p-4'>
                <div>
                 <img src={images[0].url} alt="" />
                </div>
