@@ -9,7 +9,7 @@ import {
   getUserTracks,
   getTopArtists,
   getTopTracks,
-  getMorePlaylists
+  getMorePlaylists,
 } from "../spotify";
 import { catchErrors, formatTime } from "../utils";
 import { Link } from "react-router-dom";
@@ -32,9 +32,9 @@ const Profile = () => {
       const userEpisodes = await getUserEpisodes();
       const userAlbums = await getUserAlbums();
       const userTracks = await getUserTracks();
-      const userTopTracks = await getTopTracks("short_term", 4);
-      const userTopArtists = await getTopArtists();
-      const morePlaylists = await getMorePlaylists(user.data.id)
+      const userTopTracks = await getTopTracks("long_term", 10);
+      const userTopArtists = await getTopArtists("long_term", 10);
+      const morePlaylists = await getMorePlaylists(user.data.id);
       setPlaylists(userPlaylists.data);
       setProfile(user.data);
       setFollowing(followingArtists.data.artists.total);
@@ -48,7 +48,7 @@ const Profile = () => {
     };
     catchErrors(fetchData());
   }, []);
- 
+
   if (isLoading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -59,7 +59,7 @@ const Profile = () => {
   return (
     <div className="w-full">
       <div className="w-full flex flex-col justify-center items-center">
-        <div className="w-64 h-64 rounded-full  shadow-5xl flex justify-center items-center">
+        <div className="w-64 h-64 rounded-full bg-[rgba(256,256,256,0.07)] shadow-5xl flex justify-center items-center">
           <div className="w-60 h-60">
             {profile.images[0].url ? (
               <img
@@ -78,27 +78,27 @@ const Profile = () => {
           {profile.display_name}
         </p>
         <div className="flex gap-8 text-2xl">
-          <div className="bg-black/40 flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
             <p className="text-green-400">{profile.followers.total}</p>
             <p className="text-base">Followers</p>
           </div>
-          <div className="bg-black/40 flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
             <p className="text-green-400">{following}</p>
             <p className="text-base">Following</p>
           </div>
-          <div className="bg-black/40 flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
             <p className="text-green-400">{playlists.total}</p>
             <p className="text-base">Playlists</p>
           </div>
-          <div className="bg-black/40 flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
             <p className="text-green-400">{episodes.total}</p>
             <p className="text-base">Episodes</p>
           </div>
-          <div className="bg-black/40 flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
             <p className="text-green-400">{albums.total}</p>
             <p className="text-base">Albums</p>
           </div>
-          <div className="bg-black/40 flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
             <p className="text-green-400">{likedSongs.total}</p>
             <p className="text-base">Liked Songs</p>
           </div>
@@ -107,10 +107,10 @@ const Profile = () => {
           <div className=" bg-[#3F305E]  border-2 border-purple-400 w-48 h-32"></div>
           <div className=" bg-[#214258]  border-2 border-blue-400 w-48 h-32"></div> */}
         </div>
-        <div className="flex mt-16 gap-16 justify-between w-full">
+        <div className="flex mt-16 gap-16 justify-between">
           <div className="w-[500px] shrink-0  ">
             <div className="flex mb-8 text-gray-100 justify-between items-center w-full">
-              <p className="text-2xl  font-medium">Top artists this month</p>
+              <p className="text-2xl  font-medium">Top artists of all time</p>
               <Link
                 to="top-artists"
                 className="hover:underline text-gray-300 hover:text-gray-100 cursor-pointer"
@@ -123,8 +123,7 @@ const Profile = () => {
                 const { id, images, name } = item;
                 return (
                   <div
-                    className="flex py-3 px-4 hover:bg-black/40 text-gray-200  items-center cursor-pointer"
-                    
+                    className="flex py-3 px-4 hover:bg-[rgba(256,256,256,0.07)] text-gray-200  items-center cursor-pointer"
                     key={id}
                   >
                     <div className="w-16 h-16">
@@ -146,9 +145,9 @@ const Profile = () => {
               })}
             </div>
           </div>
-          <div className="w-full">
-            <div className="flex mb-8 text-gray-100 justify-between items-center w-full">
-              <p className="text-2xl  font-medium">Top tracks this month</p>
+          <div className="">
+            <div className="flex mb-8 text-gray-100 justify-between items-center">
+              <p className="text-2xl  font-medium">Top tracks of all time</p>
               <Link
                 to="top-artists"
                 className="hover:underline text-gray-300 hover:text-gray-100 cursor-pointer"
@@ -156,12 +155,12 @@ const Profile = () => {
                 See all
               </Link>
             </div>
-            <div className="-ml-4 flex flex-col">
+            <div className=" flex flex-col w-full">
               {topTracks.map((item) => {
                 const { album, artists, duration_ms, id, name } = item;
                 return (
                   <div
-                    className="flex justify-between py-3 px-4 hover:bg-black/40 text-gray-200  items-center cursor-pointer"
+                    className="flex justify-between py-3  hover:bg-[rgba(256,256,256,0.07)] text-gray-200  items-center cursor-pointer overflow-hidden w-full"
                     key={id}
                   >
                     <div className="flex items-center">
@@ -176,11 +175,17 @@ const Profile = () => {
                       </div>
                       <div className="ml-4">
                         <p className="text-gray-200 ">{name}</p>
-                        <div className="text-gray-400 text-sm flex gap-2">
+                        {/* <div className="text-gray-400 text-sm whitespace-nowrap"> */}
+                        <div className="text-gray-400 text-sm whitespace-nowrap text-ellipsis overflow-hidden max-w-lg ">
                           {artists.map((item, index) => {
-                            return <p key={item.id}>{item.name}{index===artists.length-1?'':','}</p>;
+                            return (
+                              <span key={item.id}>
+                                {item.name}
+                                {index === artists.length - 1 ? "" : ","}
+                              </span>
+                            );
                           })}
-                          <p>.{album.name}</p>
+                          <span>|{album.name}</span>
                         </div>
                       </div>
                     </div>
@@ -191,24 +196,24 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="w-full ">
+        {/* <div className="w-full ">
           <div className="flex w-full">
-            <p className="text-2xl font-medium text-gray-100">Playlists</p>
+            <p className="text-2xl font-medium text-gray-100 mt-8">Playlists</p>
           </div>
-         <div className="flex flex-wrap gap-5 mt-10">
-         {
-          playlists.items.map((item)=>{
-            const {id,images,name} = item
-            return <div key={id} className='bg-black/40 w-56  p-4'>
-               <div>
-                <img src={images[0].url} alt="" />
-               </div>
-               <p className="mt-4 text-gray-200">{name}</p>
-            </div>
-          })
-         }
-         </div>
-        </div>
+          <div className="flex flex-wrap gap-8 mt-10">
+            {playlists.items.map((item) => {
+              const { id, images, name } = item;
+              return (
+                <div key={id} className="bg-[rgba(256,256,256,0.07)] rounded-md w-60  px-6 py-5">
+                  <div>
+                    <img className="rounded-md" src={images[0].url} alt="" />
+                  </div>
+                  <p className="mt-4 text-gray-200 text-center">{name}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div> */}
       </div>
     </div>
   );
