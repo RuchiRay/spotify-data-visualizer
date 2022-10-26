@@ -23,7 +23,7 @@ const Playlists = () => {
     );
   return (
     <div className="w-full ">
-      <p className="text-gray-100 text-2xl font-semibold">Your Playlist</p>
+      <p className="text-gray-100 text-2xl mb-12 font-semibold">Your Playlist</p>
      <div className="flex gap-8 flex-wrap">
       {
         playlists.map((item)=>{
