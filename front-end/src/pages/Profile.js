@@ -57,10 +57,10 @@ const Profile = () => {
     );
   }
   return (
-    <div className="w-full">
+    <div className="w-full bg-black">
       <div className="w-full flex flex-col justify-center items-center">
-        <div className="w-64 h-64 rounded-full bg-[rgba(256,256,256,0.07)] shadow-5xl flex justify-center items-center">
-          <div className="w-60 h-60">
+        <div className="w-36 h-36 sm:w-48 sm:h-48  lg:w-64 lg:h-64 rounded-full bg-[rgba(256,256,256,0.07)] shadow-5xl flex justify-center items-center">
+          <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-60 lg:h-60">
             {profile.images[0].url ? (
               <img
                 src={profile.images[0].url}
@@ -77,7 +77,7 @@ const Profile = () => {
         <p className="text-5xl semi-bold my-12 text-green-500">
           {profile.display_name}
         </p>
-        <div className="flex gap-8 text-2xl">
+        <div className="flex flex-wrap justify-center gap-8 text-2xl">
           <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
             <p className="text-green-400">{profile.followers.total}</p>
             <p className="text-base">Followers</p>
@@ -107,8 +107,8 @@ const Profile = () => {
           <div className=" bg-[#3F305E]  border-2 border-purple-400 w-48 h-32"></div>
           <div className=" bg-[#214258]  border-2 border-blue-400 w-48 h-32"></div> */}
         </div>
-        <div className="flex mt-16 gap-16 justify-between">
-          <div className="w-[500px] shrink-0  ">
+        <div className="flex flex-wrap  mt-16 gap-16  justify-center">
+          <div className="w-full ">
             <div className="flex mb-8 text-gray-100 justify-between items-center w-full">
               <p className="text-2xl  font-medium">Top artists of all time</p>
               <Link
@@ -149,7 +149,7 @@ const Profile = () => {
             <div className="flex mb-8 text-gray-100 justify-between items-center">
               <p className="text-2xl  font-medium">Top tracks of all time</p>
               <Link
-                to="top-artists"
+                to="top-tracks"
                 className="hover:underline text-gray-300 hover:text-gray-100 cursor-pointer"
               >
                 See all
@@ -164,7 +164,7 @@ const Profile = () => {
                     key={id}
                   >
                     <div className="flex items-center">
-                      <div className="w-16 h-16">
+                      <div className="w-16 h-16 shrink-0">
                         {album?.images[0]?.url ? (
                           <img src={album.images[0].url} alt="" />
                         ) : (
@@ -176,7 +176,7 @@ const Profile = () => {
                       <div className="ml-4">
                         <p className="text-gray-200 ">{name}</p>
                         {/* <div className="text-gray-400 text-sm whitespace-nowrap"> */}
-                        <div className="text-gray-400 text-sm whitespace-nowrap text-ellipsis overflow-hidden max-w-lg ">
+                        <div className="text-gray-400 text-sm whitespace-nowrap text-ellipsis overflow-hidden max-w-[100px] ">
                           {artists.map((item, index) => {
                             return (
                               <span key={item.id}>

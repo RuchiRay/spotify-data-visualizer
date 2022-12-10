@@ -7,12 +7,12 @@ import { GiMusicalScore, GiMicrophone } from "react-icons/gi";
 import { logout } from "../spotify";
 const Home = () => {
   return (
-    <div className="flex w-full text-gray-400">
-      <div className="bg-black h-screen min-h-[650px] flex flex-col items-center justify-between py-8 w-28  sticky shrink-0 top-0 left-0 text-sm">
-        <div>
+    <div className="flex flex-col-reverse w-full text-gray-400">
+      <div className="bg-black md:h-screen md:min-h-[650px] flex md:flex-col items-center justify-between md:py-8 md:w-28  sticky shrink-0 bottom-0 md:top-0 md:left-0 text-sm w-full">
+        <div className="hidden">
           <BsSpotify className="text-green-500 text-5xl" />
         </div>
-        <div className="flex flex-col text-xs  w-full items-center">
+        <div className="flex text-center md:flex-col text-[0.65rem] md:text-xs justify-between w-full items-baseline">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -55,7 +55,7 @@ const Home = () => {
             <div className="text-2xl pb-1">
               <GiMusicalScore />
             </div>
-            <p> Top Tracks</p>
+            <p className="leading-4"> Top Tracks</p>
           </NavLink>
           <NavLink
             to="top-artists"
@@ -69,7 +69,7 @@ const Home = () => {
             <div className="text-3xl pb-1">
               <GiMicrophone />
             </div>
-            <p> Top Artists</p>
+            <p className="leading-4"> Top Artists</p>
           </NavLink>
           <NavLink
             to="recent"
@@ -97,7 +97,7 @@ const Home = () => {
             <div className="text-2xl pb-1">
               <BsFillEmojiHeartEyesFill />
             </div>
-            <p className="text-center">Artist Following</p>
+            <p className="text-center leading-4">Artist Following</p>
           </NavLink>
           <NavLink
             to="liked-songs"
@@ -111,14 +111,14 @@ const Home = () => {
             <div className="text-2xl pb-1">
               <BsFillHeartFill />
             </div>
-            <p className="text-center">Liked Songs</p>
+            <p className="text-center leading-4">Liked Songs</p>
           </NavLink>
         </div>
-        <div>
+        {/* <div>
           <button  onClick={logout}>LOGOUT</button>
-        </div>
+        </div> */}
       </div>
-      <div className="w-full p-16">
+      <div className="w-full sm:p-4 lg:p-8 xl:p-16">
         <Outlet />
       </div>
     </div>

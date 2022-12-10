@@ -17,7 +17,7 @@ const Playlists = () => {
   console.log(playlists);
   if (loading)
     return (
-      <div className="w-full flex items-center justify-center h-full">
+      <div className="w-full flex items-center justify-center h-screen">
         <Loader />
       </div>
     );
