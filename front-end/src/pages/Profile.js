@@ -59,7 +59,7 @@ const Profile = () => {
   return (
     <div className="w-full bg-black">
       <div className="w-full flex flex-col justify-center items-center">
-        <div className="w-36 h-36 sm:w-48 sm:h-48  lg:w-64 lg:h-64 rounded-full bg-[rgba(256,256,256,0.07)] shadow-5xl flex justify-center items-center">
+        <div className="mt-8 md:mt-0 w-36 h-36 sm:w-48 sm:h-48  lg:w-64 lg:h-64 rounded-full bg-[rgba(256,256,256,0.07)] shadow-5xl flex justify-center items-center">
           <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-60 lg:h-60">
             {profile.images[0].url ? (
               <img
@@ -74,31 +74,31 @@ const Profile = () => {
             )}
           </div>
         </div>
-        <p className="text-5xl semi-bold my-12 text-green-500">
+        <p className="text-3xl md:text-5xl semi-bold my-6 md:my-12 text-green-500">
           {profile.display_name}
         </p>
-        <div className="flex flex-wrap justify-center gap-8 text-2xl">
-          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
+        <div className="flex flex-wrap justify-center gap-8 text-lg md:text-2xl">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center  w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{profile.followers.total}</p>
             <p className="text-base">Followers</p>
           </div>
-          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{following}</p>
             <p className="text-base">Following</p>
           </div>
-          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{playlists.total}</p>
             <p className="text-base">Playlists</p>
           </div>
-          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{episodes.total}</p>
             <p className="text-base">Episodes</p>
           </div>
-          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{albums.total}</p>
             <p className="text-base">Albums</p>
           </div>
-          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-36 h-24">
+          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{likedSongs.total}</p>
             <p className="text-base">Liked Songs</p>
           </div>
