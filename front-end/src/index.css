@@ -17,3 +17,15 @@
     }
    
   }
+  @layer components {
+    .first-grid{
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+    }
+    .second-grid{
+      display: grid;
+      grid-template-columns: 1fr max-content;
+      gap: 10px;
+    }
+  }

@@ -118,7 +118,7 @@ const Home = () => {
           <button  onClick={logout}>LOGOUT</button>
         </div> */}
       </div>
-      <div className="w-full sm:p-4 lg:p-8 xl:p-16">
+      <div className="w-full p-4 lg:p-8 xl:p-16">
         <Outlet />
       </div>
     </div>

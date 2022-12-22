@@ -110,10 +110,12 @@ const Profile = () => {
         <div className="flex flex-wrap  mt-16 gap-16  justify-center">
           <div className="w-full ">
             <div className="flex mb-8 text-gray-100 justify-between items-center w-full">
-              <p className="text-2xl  font-medium">Top artists of all time</p>
+              <p className="text-lg lg:text-2xl  font-medium">
+                Top artists of all time
+              </p>
               <Link
                 to="top-artists"
-                className="hover:underline text-gray-300 hover:text-gray-100 cursor-pointer"
+                className="hover:underline text-sm lg:text-base text-gray-300 hover:text-gray-100 cursor-pointer"
               >
                 See all
               </Link>
@@ -139,81 +141,65 @@ const Profile = () => {
                         </div>
                       )}
                     </div>
-                    <p className="ml-4">{name}</p>
+                    <p className="ml-4 text-sm md:text-base">{name}</p>
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="">
+          <div className="w-full">
             <div className="flex mb-8 text-gray-100 justify-between items-center">
-              <p className="text-2xl  font-medium">Top tracks of all time</p>
+              <p className="text-lg lg:text-2xl  font-medium">
+                Top tracks of all time
+              </p>
               <Link
                 to="top-tracks"
-                className="hover:underline text-gray-300 hover:text-gray-100 cursor-pointer"
+                className="hover:underline text-sm lg:text-base text-gray-300 hover:text-gray-100 cursor-pointer"
               >
                 See all
               </Link>
             </div>
-            <div className=" flex flex-col w-full">
+            <ul>
               {topTracks.map((item) => {
                 const { album, artists, duration_ms, id, name } = item;
                 return (
-                  <div
-                    className="flex justify-between py-3  hover:bg-[rgba(256,256,256,0.07)] text-gray-200  items-center cursor-pointer overflow-hidden w-full"
-                    key={id}
-                  >
-                    <div className="flex items-center">
-                      <div className="w-16 h-16 shrink-0">
-                        {album?.images[0]?.url ? (
-                          <img src={album.images[0].url} alt="" />
-                        ) : (
-                          <div>
-                            <FaUser />
-                          </div>
-                        )}
-                      </div>
-                      <div className="ml-4">
-                        <p className="text-gray-200 ">{name}</p>
-                        {/* <div className="text-gray-400 text-sm whitespace-nowrap"> */}
-                        <div className="text-gray-400 text-sm whitespace-nowrap text-ellipsis overflow-hidden max-w-[100px] ">
-                          {artists.map((item, index) => {
-                            return (
-                              <span key={item.id}>
-                                {item.name}
-                                {index === artists.length - 1 ? "" : ","}
-                              </span>
-                            );
-                          })}
-                          <span>|{album.name}</span>
+                  <li key={id}>
+                    <Link to="top-tracks" className="mb-6 first-grid">
+                      {/* first div for pic */}
+                      <div>
+                        <div className="inline-block relative w-16 h-16 mr-5">
+                          {album?.images[0]?.url ? (
+                            <img src={album.images[0].url} alt="" />
+                          ) : (
+                            <div>
+                              <FaUser />
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </div>
-                    <div>{formatTime(duration_ms)}</div>
-                  </div>
+                      {/* second div for info */}
+                      <div className="second-grid">
+                        <span className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]">
+                          <span className="mb-[5px] text-gray-200 text-sm md:text-base">{name}</span>
+                          <div className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]text-gray-400 text-sm mt-[3px]">
+                            {
+                              artists.map((item)=>{
+                                return <span key={item.id}>{item.name}, &nbsp; </span>
+                              })
+                            }
+                            &nbsp; {album.name}
+                          </div>
+                        </span>
+                        <span>{formatTime(duration_ms)}</span>
+                      </div>
+                    </Link>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
+          
           </div>
         </div>
-        {/* <div className="w-full ">
-          <div className="flex w-full">
-            <p className="text-2xl font-medium text-gray-100 mt-8">Playlists</p>
-          </div>
-          <div className="flex flex-wrap gap-8 mt-10">
-            {playlists.items.map((item) => {
-              const { id, images, name } = item;
-              return (
-                <div key={id} className="bg-[rgba(256,256,256,0.07)] rounded-md w-60  px-6 py-5">
-                  <div>
-                    <img className="rounded-md" src={images[0].url} alt="" />
-                  </div>
-                  <p className="mt-4 text-gray-200 text-center">{name}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div> */}
       </div>
     </div>
   );
