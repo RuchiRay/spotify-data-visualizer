@@ -183,11 +183,11 @@ const Profile = () => {
                           <span className="mb-[5px] text-gray-200 text-sm md:text-base">{name}</span>
                           <div className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]text-gray-400 text-sm mt-[3px]">
                             {
-                              artists.map((item)=>{
-                                return <span key={item.id}>{item.name}, &nbsp; </span>
+                              artists.map((item,index)=>{
+                                return <span key={item.id}>{item.name}{index===artists.length-1?"":","}&nbsp; </span>
                               })
                             }
-                            &nbsp; {album.name}
+                             | {album.name}
                           </div>
                         </span>
                         <span>{formatTime(duration_ms)}</span>

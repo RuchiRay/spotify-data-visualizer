@@ -24,6 +24,9 @@ module.exports = {
         "5xl": "15px 15px 30px #0a0a0a,-15px -15px 30px #262626",
         "6xl": "20px 20px 55px #121212,-20px -20px 55px #1e1e1e",
       },
+      gridTemplateColumns:{
+        'custom':'repeat(auto-fit,minmax(15rem,1fr))'
+      }
     },
 
     borderWidth: {

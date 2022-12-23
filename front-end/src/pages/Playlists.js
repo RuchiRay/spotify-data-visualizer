@@ -24,11 +24,11 @@ const Playlists = () => {
   return (
     <div className="w-full ">
       <p className="text-gray-100 text-2xl mb-12 font-semibold">Your Playlist</p>
-     <div className="flex gap-8 flex-wrap">
+     <div className="grid gap-6 lg:gap-10 grid-cols-custom">
       {
         playlists.map((item)=>{
           const {id,images,name,tracks} = item
-          return <div key={id} className='bg-[rgba(256,256,256,0.07)] cursor-pointer rounded-md w-60  px-6 py-5'>
+          return <div key={id} className='bg-[rgba(256,256,256,0.07)] cursor-pointer rounded-md   px-6 py-5'>
                <div>
                 <img className="rounded-md" src={images[0].url} alt="" />
                </div>

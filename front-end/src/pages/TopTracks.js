@@ -3,6 +3,7 @@ import { getTopTracks } from "../spotify";
 import { catchErrors ,formatTime} from "../utils";
 import Loader from "../components/Loader";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const TopTracks = () => {
   const [tracks, setTracks] = useState(null);
@@ -33,11 +34,11 @@ const TopTracks = () => {
     );
   return (
     <div className="w-full">
-      <div className="flex justify-between items-baseline">
-        <p className="text-gray-100 text-2xl mb-12 font-semibold">
+      <div className="flex gap-4 mb-12 flex-wrap justify-between items-baseline">
+        <p className="text-gray-100 text-lg md:text-2xl  font-semibold">
           Your Playlist
         </p>
-        <div className="flex gap-8 text-gray-100">
+        <div className="flex gap-2 flex-wrap md:gap-8 text-gray-100">
           {terms.map((item) => {
             return (
               <button
@@ -53,45 +54,44 @@ const TopTracks = () => {
           })}
         </div>
       </div>
-      <div>
-        {tracks.map((item) => {
-          const { album, artists, duration_ms, id, name } = item;
-          return (
-            <div
-              className="flex justify-between py-3  hover:bg-[rgba(256,256,256,0.07)] text-gray-200  items-center cursor-pointer overflow-hidden w-full"
-              key={id}
-            >
-              <div className="flex items-center">
-                <div className="w-16 h-16">
-                  {album?.images[0]?.url ? (
-                    <img src={album.images[0].url} alt="" />
-                  ) : (
-                    <div>
-                      <FaUser />
-                    </div>
-                  )}
-                </div>
-                <div className="ml-4">
-                  <p className="text-gray-200 ">{name}</p>
-                  {/* <div className="text-gray-400 text-sm whitespace-nowrap"> */}
-                  <div className="text-gray-400 text-sm whitespace-nowrap text-ellipsis overflow-hidden max-w-lg ">
-                    {artists.map((item, index) => {
-                      return (
-                        <span key={item.id}>
-                          {item.name}
-                          {index === artists.length - 1 ? "" : ","}
+      <ul>
+              {tracks.map((item) => {
+                const { album, artists, duration_ms, id, name } = item;
+                return (
+                  <li key={id}>
+                    <Link to="top-tracks" className="mb-6 first-grid">
+                      {/* first div for pic */}
+                      <div>
+                        <div className="inline-block relative w-16 h-16 mr-5">
+                          {album?.images[0]?.url ? (
+                            <img src={album.images[0].url} alt="" />
+                          ) : (
+                            <div>
+                              <FaUser />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      {/* second div for info */}
+                      <div className="second-grid">
+                        <span className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]">
+                          <span className="mb-[5px] text-gray-200 text-sm md:text-base">{name}</span>
+                          <div className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]text-gray-400 text-sm mt-[3px]">
+                            {
+                              artists.map((item,index)=>{
+                                return <span key={item.id}>{item.name}{index===artists.length-1?"":","}&nbsp; </span>
+                              })
+                            }
+                             | {album.name}
+                          </div>
                         </span>
-                      );
-                    })}
-                    <span>|{album.name}</span>
-                  </div>
-                </div>
-              </div>
-              <div>{formatTime(duration_ms)}</div>
-            </div>
-          );
-        })}
-      </div>
+                        <span>{formatTime(duration_ms)}</span>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
     </div>
   );
 };
