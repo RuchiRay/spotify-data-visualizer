@@ -34,11 +34,11 @@ const TopArtists = () => {
     );
   return (
     <div className="w-full">
-      <div className="flex justify-between items-baseline">
-        <p className="text-gray-100 text-2xl mb-12 font-semibold">
-          Your Top Artists
+      <div className="flex gap-4 mb-12 flex-wrap justify-between items-baseline">
+        <p className="text-gray-100 text-lg md:text-2xl  font-semibold">
+          Your Artists
         </p>
-        <div className="flex gap-8 text-gray-100">
+        <div className="flex gap-2 flex-wrap md:gap-8 text-gray-100">
           {terms.map((item) => {
             return (
               <button
@@ -54,36 +54,33 @@ const TopArtists = () => {
           })}
         </div>
       </div>
-      <div className="flex flex-wrap">
+      <div className="grid gap-8 grid-cols-custom2">
         {artists.map((item) => {
           const { id, images, name } = item;
           return (
             <div
-              className="flex  py-3  hover:bg-[rgba(256,256,256,0.07)] text-gray-200  items-center cursor-pointer w-32 h-32"
+              className="flex bg-[rgba(256,256,256,0.07)] py-4 px-4 justify-center  text-gray-200  items-center cursor-pointer min-w-[11rem] "
               key={id}
             >
-              <div className="flex items-center">
-                <div className="w-16 h-16">
+              <div className="">
+                <div className="w-40 rounded-full h-40">
                   {images[0]?.url ? (
-                    <img src={images[0].url} alt="" />
+                    <img src={images[0].url} alt="" className="rounded-full" />
                   ) : (
                     <div>
                       <FaUser />
                     </div>
                   )}
                 </div>
-                <div className="ml-4">
+                <div className="mt-4">
                   <p className="text-gray-200 ">{name}</p>
+                  <p className="text-gray-400 text-xs">Artist</p>
                 </div>
               </div>
             </div>
           );
         })}
-        {
-          artists.length===0? <div>
-            No data to be displayed
-          </div>:""
-        }
+        {artists.length === 0 ? <div>No data to be displayed</div> : ""}
       </div>
     </div>
   );

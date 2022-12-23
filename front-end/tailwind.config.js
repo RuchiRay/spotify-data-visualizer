@@ -25,7 +25,8 @@ module.exports = {
         "6xl": "20px 20px 55px #121212,-20px -20px 55px #1e1e1e",
       },
       gridTemplateColumns:{
-        'custom':'repeat(auto-fit,minmax(15rem,1fr))'
+        'custom':'repeat(auto-fit,minmax(15rem,1fr))',
+        'custom2':'repeat(auto-fit,minmax(11rem,1fr))',
       }
     },
 
