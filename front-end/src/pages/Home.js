@@ -7,12 +7,12 @@ import { GiMusicalScore, GiMicrophone } from "react-icons/gi";
 import { logout } from "../spotify";
 const Home = () => {
   return (
-    <div className="flex flex-col-reverse w-full text-gray-400">
-      <div className="bg-black md:h-screen md:min-h-[650px] flex md:flex-col items-center justify-between md:py-8 md:w-28  sticky shrink-0 bottom-0 md:top-0 md:left-0 text-sm w-full">
+    <div className="flex flex-col-reverse md:flex-row w-full text-gray-400">
+      <div className="bg-black md:h-screen md:min-h-[650px] flex md:flex-col items-center justify-between md:py-8 md:w-28 z-10 sticky shrink-0 bottom-0 md:top-0 md:left-0 text-sm w-full">
         <div className="hidden">
           <BsSpotify className="text-green-500 text-5xl" />
         </div>
-        <div className="flex text-center md:flex-col text-[0.65rem] md:text-xs justify-between w-full items-baseline">
+        <div className="flex text-center md:flex-col text-[0.65rem] md:text-xs justify-between w-full items-baseline md:items-center">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -118,7 +118,7 @@ const Home = () => {
           <button  onClick={logout}>LOGOUT</button>
         </div> */}
       </div>
-      <div className="w-full p-4 lg:p-8 xl:p-16">
+      <div className="w-full  p-4 lg:p-8 xl:p-16">
         <Outlet />
       </div>
     </div>

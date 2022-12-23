@@ -57,7 +57,7 @@ const Profile = () => {
     );
   }
   return (
-    <div className="w-full bg-black">
+    <div className="w-full">
       <div className="w-full flex flex-col justify-center items-center">
         <div className="mt-8 md:mt-0 w-36 h-36 sm:w-48 sm:h-48  lg:w-64 lg:h-64 rounded-full bg-[rgba(256,256,256,0.07)] shadow-5xl flex justify-center items-center">
           <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-60 lg:h-60">
@@ -107,8 +107,8 @@ const Profile = () => {
           <div className=" bg-[#3F305E]  border-2 border-purple-400 w-48 h-32"></div>
           <div className=" bg-[#214258]  border-2 border-blue-400 w-48 h-32"></div> */}
         </div>
-        <div className="flex flex-wrap  mt-16 gap-16  justify-center">
-          <div className="w-full ">
+        <div className="flex w-full flex-col md:flex-row mt-16 gap-16  justify-center">
+          <div className="md:w-3/5 lg:min-w-[24rem] ">
             <div className="flex mb-8 text-gray-100 justify-between items-center w-full">
               <p className="text-lg lg:text-2xl  font-medium">
                 Top artists of all time
