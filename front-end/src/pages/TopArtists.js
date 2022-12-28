@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTopArtists } from "../spotify";
-import { catchErrors, formatTime } from "../utils";
+import { catchErrors } from "../utils";
 import Loader from "../components/Loader";
 import { FaUser } from "react-icons/fa";
 

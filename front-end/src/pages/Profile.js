@@ -48,7 +48,7 @@ const Profile = () => {
     };
     catchErrors(fetchData());
   }, []);
-
+console.log(albums);
   if (isLoading) {
     return (
         <Loader />

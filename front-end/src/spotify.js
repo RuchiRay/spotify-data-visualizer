@@ -112,7 +112,7 @@ export const getCurrentUserProfile = () => {
 };
 
 export const getFollowingArtist = () => {
-  return axios.get("/me/following?type=artist");
+  return axios.get("/me/following?type=artist&limit=50");
 };
 
 export const getUserPlaylists = () => {
@@ -128,7 +128,7 @@ export const getUserAlbums = () => {
   return axios.get("/me/albums");
 };
 export const getUserTracks = () => {
-  return axios.get("/me/tracks");
+  return axios.get("/me/tracks?limit=50");
 };
 export const getTopTracks = (time_range = "short_term", limit = 5) => {
   return axios.get(`/me/top/tracks?limit=${limit}&time_range=${time_range}`);
@@ -139,3 +139,4 @@ export const getTopArtists = (time_range = "short_term", limit = 5) => {
 export const getRecentlyPlayed = ()=>{
   return axios.get('/me/player/recently-played')
 }
+
