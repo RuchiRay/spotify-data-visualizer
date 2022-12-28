@@ -28,9 +28,7 @@ const TopTracks = () => {
   }, [term]);
   if (loading)
     return (
-      <div className="w-full flex items-center justify-center h-screen">
         <Loader />
-      </div>
     );
   return (
     <div className="w-full">

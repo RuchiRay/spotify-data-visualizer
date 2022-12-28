@@ -2,7 +2,7 @@ import React from "react";
 import { Bars } from "react-loader-spinner";
 const Loader = () => {
   return (
-    <div>
+    <div className="w-full h-screen flex items-center justify-center">
       <Bars
         heigth="100"
         width="100"

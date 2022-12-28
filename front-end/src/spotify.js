@@ -38,9 +38,7 @@ const refreshToken = async () => {
     ) {
       console.error("no refresh token found");
       logout();
-    }
-    else
-    {
+    } else {
       const { data } = await axios.get(
         `/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`
       );
@@ -49,7 +47,7 @@ const refreshToken = async () => {
         data.access_token
       );
       window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
-      reloadPage()
+      reloadPage();
     }
   } catch (error) {
     console.error(error);
@@ -113,29 +111,31 @@ export const getCurrentUserProfile = () => {
   return axios.get("/me");
 };
 
-export const getFollowingArtist = ()=>{
-  return axios.get('/me/following?type=artist')
-}
+export const getFollowingArtist = () => {
+  return axios.get("/me/following?type=artist");
+};
 
-export const getUserPlaylists = ()=>{
-  return axios.get('/me/playlists')
-}
-export const getMorePlaylists = (userId)=>{
-  return axios.get(`/users/${userId}/playlists`)
-}
-export const getUserEpisodes = ()=>{
-  return axios.get('/me/episodes')
-}
-export const getUserAlbums = ()=>{
-  return axios.get('/me/albums')
-}
-export const getUserTracks = ()=>{
-  return axios.get('/me/tracks')
-}
-export const getTopTracks = (time_range='short_term',limit=5)=>{
-  return axios.get(`/me/top/tracks?limit=${limit}&time_range=${time_range}`)
-}
-export const getTopArtists = (time_range='short_term',limit=5)=>{
-  return axios.get(`/me/top/artists?limit=${limit}&time_range=${time_range}`)
-
+export const getUserPlaylists = () => {
+  return axios.get("/me/playlists");
+};
+export const getMorePlaylists = (userId) => {
+  return axios.get(`/users/${userId}/playlists`);
+};
+export const getUserEpisodes = () => {
+  return axios.get("/me/episodes");
+};
+export const getUserAlbums = () => {
+  return axios.get("/me/albums");
+};
+export const getUserTracks = () => {
+  return axios.get("/me/tracks");
+};
+export const getTopTracks = (time_range = "short_term", limit = 5) => {
+  return axios.get(`/me/top/tracks?limit=${limit}&time_range=${time_range}`);
+};
+export const getTopArtists = (time_range = "short_term", limit = 5) => {
+  return axios.get(`/me/top/artists?limit=${limit}&time_range=${time_range}`);
+};
+export const getRecentlyPlayed = ()=>{
+  return axios.get('/me/player/recently-played')
 }
