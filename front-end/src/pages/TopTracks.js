@@ -4,6 +4,7 @@ import { catchErrors ,formatTime} from "../utils";
 import Loader from "../components/Loader";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import SongList from "../components/SongList";
 
 const TopTracks = () => {
   const [tracks, setTracks] = useState(null);
@@ -56,37 +57,7 @@ const TopTracks = () => {
               {tracks.map((item) => {
                 const { album, artists, duration_ms, id, name } = item;
                 return (
-                  <li key={id}>
-                    <Link to="top-tracks" className="mb-6 first-grid">
-                      {/* first div for pic */}
-                      <div>
-                        <div className="inline-block relative w-16 h-16 mr-5">
-                          {album?.images[0]?.url ? (
-                            <img src={album.images[0].url} alt="" />
-                          ) : (
-                            <div>
-                              <FaUser />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      {/* second div for info */}
-                      <div className="second-grid">
-                        <span className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]">
-                          <span className="mb-[5px] text-gray-200 text-sm md:text-base">{name}</span>
-                          <div className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]text-gray-400 text-sm mt-[3px]">
-                            {
-                              artists.map((item,index)=>{
-                                return <span key={item.id}>{item.name}{index===artists.length-1?"":","}&nbsp; </span>
-                              })
-                            }
-                             | {album.name}
-                          </div>
-                        </span>
-                        <span>{formatTime(duration_ms)}</span>
-                      </div>
-                    </Link>
-                  </li>
+                <SongList key={id} props ={item}/>
                 );
               })}
             </ul>
