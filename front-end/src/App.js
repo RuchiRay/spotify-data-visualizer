@@ -14,6 +14,7 @@ import {
   LikedSongs,
 } from "./pages";
 import { SingleArtist } from "./pages/SingleArtist";
+import { ScrollToTop } from "./components/ScrollToTop";
 function App() {
   const [token, setToken] = useState(null);
 
@@ -22,6 +23,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         <Route path="/" element={token ? <Home /> : <Login />}>
           <Route index element={<Profile />} />
