@@ -10,7 +10,7 @@ const SongList = ({props}) => {
           <Link to="top-tracks" className="mb-6 first-grid">
             {/* first div for pic */}
             <div>
-              <div className="inline-block relative w-16 h-16 mr-5">
+              <div className="inline-block relative w-14 h-14 mr-5">
                 {album?.images[0]?.url ? (
                   <img src={album.images[0].url} alt="" />
                 ) : (

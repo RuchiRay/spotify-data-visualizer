@@ -3,6 +3,7 @@ import { getTopArtists } from "../spotify";
 import { catchErrors } from "../utils";
 import Loader from "../components/Loader";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const TopArtists = () => {
   const [artists, setArtists] = useState(null);
@@ -56,9 +57,10 @@ const TopArtists = () => {
         {artists.map((item) => {
           const { id, images, name } = item;
           return (
-            <div
+            <Link
               className="flex bg-[rgba(256,256,256,0.07)] py-4 px-4 justify-center  text-gray-200  items-center cursor-pointer min-w-[11rem] "
               key={id}
+              to={`/artist/${id}`}
             >
               <div className="">
                 <div className="w-40 rounded-full h-40">
@@ -75,7 +77,7 @@ const TopArtists = () => {
                   <p className="text-gray-400 text-xs">Artist</p>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
         {artists.length === 0 ? <div>No data to be displayed</div> : ""}

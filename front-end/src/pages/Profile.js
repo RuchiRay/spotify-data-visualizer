@@ -49,7 +49,6 @@ const Profile = () => {
     };
     catchErrors(fetchData());
   }, []);
-console.log(albums);
   if (isLoading) {
     return (
         <Loader />
@@ -123,9 +122,10 @@ console.log(albums);
               {topArtists.map((item) => {
                 const { id, images, name } = item;
                 return (
-                  <div
+                  <Link
                     className="flex py-3 px-4 hover:bg-[rgba(256,256,256,0.07)] text-gray-200  items-center cursor-pointer"
                     key={id}
+                    to={`artist/${id}`}
                   >
                     <div className="w-16 h-16">
                       {images[0]?.url ? (
@@ -141,7 +141,7 @@ console.log(albums);
                       )}
                     </div>
                     <p className="ml-4 text-sm md:text-base">{name}</p>
-                  </div>
+                  </Link>
                 );
               })}
             </div>

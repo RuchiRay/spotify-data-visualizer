@@ -13,6 +13,7 @@ import {
   ArtistFollowing,
   LikedSongs,
 } from "./pages";
+import { SingleArtist } from "./pages/SingleArtist";
 function App() {
   const [token, setToken] = useState(null);
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="top-tracks" element={<TopTracks />} />
           <Route path="artists-following" element={<ArtistFollowing />} />
           <Route path="liked-songs" element={<LikedSongs />} />
+          <Route path="artist/:artistId" element={<SingleArtist />} />
         </Route>
       </Routes>
     </BrowserRouter>

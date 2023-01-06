@@ -31,7 +31,7 @@ const ArtistFollowing = () => {
           const { id, images, name } = item;
           return (
             <div
-              className="flex bg-[rgba(256,256,256,0.07)] py-4 px-4 justify-center  text-gray-200  items-center cursor-pointer min-w-[11rem] "
+              className="flex bg-[rgba(256,256,256,0.05)] py-4 px-4 justify-center  text-gray-200  items-center cursor-pointer min-w-[11rem] "
               key={id}
             >
               <div className="">

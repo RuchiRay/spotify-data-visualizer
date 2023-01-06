@@ -136,7 +136,20 @@ export const getTopTracks = (time_range = "short_term", limit = 5) => {
 export const getTopArtists = (time_range = "short_term", limit = 5) => {
   return axios.get(`/me/top/artists?limit=${limit}&time_range=${time_range}`);
 };
-export const getRecentlyPlayed = ()=>{
-  return axios.get('/me/player/recently-played')
-}
-
+export const getRecentlyPlayed = () => {
+  return axios.get("/me/player/recently-played");
+};
+export const getArtist = (id) => {
+  return axios.get(`/artists/${id}`);
+};
+export const getArtistsTopSongs = (id) => {
+  return axios.get(`/artists/${id}/top-tracks?market=ES`);
+};
+export const getRelatedArtists = (id) => {
+  return axios.get(`/artists/${id}/related-artists`);
+};
+export const checkFollow = (id) => {
+  return axios.get(
+    `/me/following/contains?type=artist&ids=${id}`
+  );
+};

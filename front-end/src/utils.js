@@ -11,3 +11,7 @@ export const formatTime = (ms) => {
   const seconds = Math.floor((ms % 60000) / 1000);
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 };
+
+export const  formatNumber = (num)=>{
+  return num.toLocaleString(navigator.language, { minimumFractionDigits: 0 })
+}
