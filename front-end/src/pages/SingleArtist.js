@@ -21,6 +21,7 @@ export const SingleArtist = () => {
   const [show, setShow] = useState(false);
   const [showValue, setShowValue] = useState(5);
   useEffect(() => {
+    setLoading(true)
     const fetchData = async () => {
       const data = await getArtist(artistId);
       const val = await checkFollow(data.data.id);

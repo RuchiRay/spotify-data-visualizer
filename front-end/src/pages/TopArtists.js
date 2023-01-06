@@ -58,7 +58,7 @@ const TopArtists = () => {
           const { id, images, name } = item;
           return (
             <Link
-              className="flex bg-[rgba(256,256,256,0.07)] py-4 px-4 justify-center  text-gray-200  items-center cursor-pointer min-w-[11rem] "
+              className="flex bg-[rgba(256,256,256,0.05)] hover:bg-[rgba(256,256,256,0.09)] py-4 px-4 justify-center  hover:shadow-lg transition-all rounded-md duration-300  text-gray-200  items-center cursor-pointer min-w-[11rem] "
               key={id}
               to={`/artist/${id}`}
             >

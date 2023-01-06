@@ -29,7 +29,7 @@ const SongList = ({props}) => {
                 <div className="overflow-hidden text-ellipsis whitespace-nowrap pr-[1px]text-gray-400 text-sm mt-[3px]">
                   {artists.map((item, index) => {
                     return (
-                      <span key={item.id}>
+                      <span  key={item.id}>
                         {item.name}
                         {index === artists.length - 1 ? "" : ","}&nbsp;{" "}
                       </span>
