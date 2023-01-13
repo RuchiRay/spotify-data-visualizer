@@ -53,7 +53,7 @@ export const SingleArtist = () => {
   return (
     <div className="-m-4 lg:-m-8 xl:-m-16">
       <div className="p-4 lg:p-8 xl:p-16 w-full flex items-end  gap-8 bg-gradient-to-r from-black to-gray-400">
-        <div className="w-56 h-56 shrink-0">
+        <div className=" w-28 h-28 md:w-40 md:h-40 lg:w-56 lg:h-56 shrink-0">
           {artist.images[0]?.url ? (
             <img src={artist.images[0].url} alt="" />
           ) : (
@@ -63,7 +63,7 @@ export const SingleArtist = () => {
           )}
         </div>
         <div>
-          <p className="text-gray-100 text-8xl font-semibold">{artist.name}</p>
+          <p className="text-gray-100 text-3xl md:text-6xl lg:text-8xl font-semibold">{artist.name}</p>
           <div className="text-gray-100 text-lg">
             <span>{formatNumber(artist.followers.total)} </span>
             <span>Followers</span>
@@ -71,7 +71,7 @@ export const SingleArtist = () => {
         </div>
       </div>
       <div className="p-4 lg:p-8 xl:px-16">
-        <div className="flex items-center flex-wrap gap-4 ">
+        <div className="flex items-center flex-wrap gap-4 my-12 ">
           <p>
             <span>Popularity</span>{" "}
             <span className="text-xl text-gray-200">{artist.popularity}%</span>
@@ -81,7 +81,7 @@ export const SingleArtist = () => {
             {follow ? "following" : "follow"}
           </button>
 
-          <div className="flex items-center flex-wrap gap-4 my-12">
+          <div className="flex items-center flex-wrap gap-4 ">
             <p>Genre</p>
             <ul className="flex flex-wrap gap-8 ml-4">
               {artist.genres.map((item, index) => {
