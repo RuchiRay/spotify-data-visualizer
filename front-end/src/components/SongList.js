@@ -6,8 +6,8 @@ import { catchErrors ,formatTime} from "../utils";
 const SongList = ({props}) => {
     const {album,artists,duration_ms,name,id} = props
     return (
-        <li>
-          <Link to="top-tracks" className="mb-6 first-grid">
+        <li className=''>
+          <Link to={`/songs/${id}`} className="mb-6 first-grid hover:bg-[rgba(256,256,256,0.09)]">
             {/* first div for pic */}
             <div>
               <div className="inline-block relative w-14 h-14 mr-5">

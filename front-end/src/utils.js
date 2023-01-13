@@ -15,3 +15,7 @@ export const formatTime = (ms) => {
 export const  formatNumber = (num)=>{
   return num.toLocaleString(navigator.language, { minimumFractionDigits: 0 })
 }
+
+export const findYear = (date)=>{
+  return date.substring(0,4)
+}

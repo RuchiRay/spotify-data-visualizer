@@ -153,3 +153,14 @@ export const checkFollow = (id) => {
     `/me/following/contains?type=artist&ids=${id}`
   );
 };
+export const getTrackDetails = (id) => {
+  return axios.get(
+    `/tracks/${id}`
+  );
+};
+export const getAudioFeature = (id) => {
+  return axios.get(
+    `/audio-features/${id}`
+  );
+};
+

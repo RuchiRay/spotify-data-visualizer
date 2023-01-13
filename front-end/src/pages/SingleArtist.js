@@ -7,7 +7,6 @@ import {
   checkFollow,
   getArtist,
   getArtistsTopSongs,
-  getRecentlyPlayed,
   getRelatedArtists,
 } from "../spotify";
 import { catchErrors, formatNumber } from "../utils";
@@ -53,8 +52,8 @@ export const SingleArtist = () => {
   }
   return (
     <div className="-m-4 lg:-m-8 xl:-m-16">
-      <div className="p-4 lg:p-8 xl:p-16 w-full flex items-end flex-wrap gap-8 bg-gradient-to-r from-black to-gray-400">
-        <div className="w-56 h-56">
+      <div className="p-4 lg:p-8 xl:p-16 w-full flex items-end  gap-8 bg-gradient-to-r from-black to-gray-400">
+        <div className="w-56 h-56 shrink-0">
           {artist.images[0]?.url ? (
             <img src={artist.images[0].url} alt="" />
           ) : (

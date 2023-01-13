@@ -15,6 +15,7 @@ import {
 } from "./pages";
 import { SingleArtist } from "./pages/SingleArtist";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { SingleSong } from "./pages/SingleSong";
 function App() {
   const [token, setToken] = useState(null);
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="artists-following" element={<ArtistFollowing />} />
           <Route path="liked-songs" element={<LikedSongs />} />
           <Route path="artist/:artistId" element={<SingleArtist />} />
+          <Route path="songs/:songId" element={<SingleSong />} />
         </Route>
       </Routes>
     </BrowserRouter>
