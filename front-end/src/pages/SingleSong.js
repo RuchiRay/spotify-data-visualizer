@@ -64,7 +64,7 @@ export const SingleSong = () => {
         </div>
       </div>
       <div className="w-full flex justify-center my-12">
-        <div className="w-full px-10">
+        <div className="w-full md:w-max px-10">
           <p className="text-gray-200 text-xl text-center mb-8">Tracks's Audio Features </p>
           <SongChart features={features}/>
         </div>
