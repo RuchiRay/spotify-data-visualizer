@@ -74,7 +74,7 @@ export const SongChart = ({ features }) => {
     ],
   };
   return (
-    <div className="w-[700px] h-[600px]">
+    <div className="w-full  md:w-[650px] md:h-[550px]">
       <Bar options={options} data={data} />
     </div>
   );
