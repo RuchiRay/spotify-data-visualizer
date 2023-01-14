@@ -3,6 +3,7 @@ import { getFollowingArtist, getTopArtists } from "../spotify";
 import { catchErrors, formatTime } from "../utils";
 import Loader from "../components/Loader";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ArtistFollowing = () => {
   const [following, setFollowing] = useState([]);
@@ -30,9 +31,10 @@ const ArtistFollowing = () => {
         {following.map((item) => {
           const { id, images, name } = item;
           return (
-            <div
+            <Link
               className="flex bg-[rgba(256,256,256,0.05)] py-4 px-4 justify-center  text-gray-200  items-center cursor-pointer min-w-[11rem] "
               key={id}
+              to={`/artist/${id}`}
             >
               <div className="">
                 <div className="w-40 rounded-full h-40">
@@ -49,7 +51,7 @@ const ArtistFollowing = () => {
                   <p className="text-gray-400 text-xs">Artist</p>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
         {following.length === 0 ? <div>No data to be displayed</div> : ""}
