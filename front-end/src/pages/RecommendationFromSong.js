@@ -2,28 +2,33 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import SongList from "../components/SongList";
-import {
-  getPlaylist,
-  getPlaylistTracks,
-  getRecommendationFromPlaylist,
-} from "../spotify";
+import { getRecommendationFromSongs, getTrackDetails } from "../spotify";
 import { catchErrors } from "../utils";
 
-export const Recommendation = () => {
-  let { recId } = useParams();
+export const RecommendationFromSong = () => {
+  let { recSongId } = useParams();
   const [loading, setLoading] = useState(true);
-  const [songs, setSongs] = useState([]);
   const [name, setName] = useState("");
+  const [tracks, setTracks] = useState([])
   useEffect(() => {
     const fetchData = async () => {
-      const tracks = await getPlaylistTracks(recId);
-      const playlist = await getPlaylist(recId);
-      const recData = await getRecommendationFromPlaylist(tracks.data.items);
-      setSongs(recData.data.tracks);
-      setName(playlist.data.name);
+      const data = await getTrackDetails(recSongId);
+      const seed_artists = getArtistId(data.data.artists);
+      const seed_tracks = data.data.id
+      const songs = await getRecommendationFromSongs(seed_artists,seed_tracks)
+      setName(data.data.name);
+      setTracks(songs.data.tracks)
       setLoading(false);
+      console.log(songs.data.tracks);
+    
     };
     catchErrors(fetchData());
+    const getArtistId = (array) => {
+      const arr = array.map((item) => {
+        return item.id;
+      });
+      return arr.join(',');
+    };
   }, []);
 
   if (loading) {
@@ -31,12 +36,13 @@ export const Recommendation = () => {
   }
   return (
     <div>
+      {" "}
       <p className="text-xl font-semibold text-gray-100 mb-12">
         Recommendation based on{" "}
         <span className="text-green-500 text-2xl">{name}</span>
       </p>
       <ul>
-        {songs.map((item) => {
+        {tracks.map((item) => {
           return <SongList key={item.id} props={item} />;
         })}
       </ul>

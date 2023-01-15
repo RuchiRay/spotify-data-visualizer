@@ -177,4 +177,10 @@ export const getRecommendationFromPlaylist = (tracks) => {
     `/recommendations?seed_tracks=${ids}&seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=50`
   );
 };
+export const getRecommendationFromSongs = (seed_artists,seed_tracks)=>{
+  const seed_genres = "";
+  return axios.get(
+    `/recommendations?seed_tracks=${seed_tracks}&seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=50`
+  );
+}
 const getTrackIds = (tracks) => tracks.map(({ track }) => track.id).join(",");

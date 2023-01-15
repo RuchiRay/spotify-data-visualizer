@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { SongChart } from "../components/SongChart";
 import { getAudioFeature, getTrackDetails } from "../spotify";
@@ -10,18 +10,18 @@ export const SingleSong = () => {
   let { songId } = useParams();
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [features, setFeatures] = useState([])
+  const [features, setFeatures] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrackDetails(songId);
-      const featureData = await getAudioFeature(songId)
+      const featureData = await getAudioFeature(songId);
       setDetails(data.data);
-      setFeatures(featureData.data)
+      setFeatures(featureData.data);
       setLoading(false);
     };
     catchErrors(fetchData());
   }, []);
-  console.log(features);
+  // console.log(features);
   if (loading) {
     return <Loader />;
   }
@@ -38,7 +38,9 @@ export const SingleSong = () => {
           )}
         </div>
         <div>
-          <p className="text-gray-100 text-xl md:text-3xl lg:text-5xl font-semibold">{details.name}</p>
+          <p className="text-gray-100 text-xl md:text-3xl lg:text-5xl font-semibold">
+            {details.name}
+          </p>
           <div className="flex gap-2 my-1">
             {details.artists.map((item, index) => {
               const { id, name } = item;
@@ -51,22 +53,33 @@ export const SingleSong = () => {
             })}
           </div>
           <div className="flex gap-2 font-semibold">
-          <span>{details.album.name}</span>
-          &middot;
-          <span>{formatTime(details.duration_ms)}</span>
-          &middot;
-          <span>{findYear(details.album.release_date)}</span>
+            <span>{details.album.name}</span>
+            &middot;
+            <span>{formatTime(details.duration_ms)}</span>
+            &middot;
+            <span>{findYear(details.album.release_date)}</span>
           </div>
           <div className="flex mt-4 gap-6 flex-wrap">
-            <a href={details.external_urls.spotify} target='_blank' rel="noopener noreferrer" className="bg-green-600 hover:bg-green-500 text-white rounded-md px-4 py-2">Play on spotify</a>
-            <button className="text-white text-sm md:text-base rounded-md px-4 py-2 border border-gree">Get Recommendations</button>
+            <a
+              href={details.external_urls.spotify}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-600 hover:bg-green-500 text-white rounded-md px-4 py-2"
+            >
+              Play on spotify
+            </a>
+            <Link to={`/recSong/${details.id}`} className="text-white text-sm md:text-base rounded-md px-4 py-2 border border-gree">
+              Get Recommendations
+            </Link>
           </div>
         </div>
       </div>
       <div className="w-full flex justify-center my-12">
         <div className="w-full md:w-max px-10">
-          <p className="text-gray-200 text-xl text-center mb-8">Tracks's Audio Features </p>
-          <SongChart features={features} page = "song"/>
+          <p className="text-gray-200 text-xl text-center mb-8">
+            Tracks's Audio Features{" "}
+          </p>
+          <SongChart features={features} page="song" />
         </div>
       </div>
     </div>

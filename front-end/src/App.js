@@ -17,7 +17,8 @@ import { SingleArtist } from "./pages/SingleArtist";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SingleSong } from "./pages/SingleSong";
 import { SinglePlaylist } from "./pages/SinglePlaylist";
-import { Recommendation } from "./pages/Recommendation";
+import { RecommendationFromPlaylist } from "./pages/RecommendationFromPlaylist";
+import { RecommendationFromSong } from "./pages/RecommendationFromSong";
 function App() {
   const [token, setToken] = useState(null);
 
@@ -39,7 +40,8 @@ function App() {
           <Route path="artist/:artistId" element={<SingleArtist />} />
           <Route path="songs/:songId" element={<SingleSong />} />
           <Route path="playlist/:playlistId" element={<SinglePlaylist />} />
-          <Route path="recommendation/:recId" element={<Recommendation />} />
+          <Route path="recommendation/:recId" element={<RecommendationFromPlaylist />} />
+          <Route path="recSong/:recSongId" element={<RecommendationFromSong />} />
         </Route>
       </Routes>
     </BrowserRouter>
