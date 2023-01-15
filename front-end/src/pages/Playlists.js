@@ -15,7 +15,6 @@ const Playlists = () => {
     };
     catchErrors(fetchData());
   }, []);
-  console.log(playlists);
   if (loading) return <Loader />;
   return (
     <div className="w-full ">

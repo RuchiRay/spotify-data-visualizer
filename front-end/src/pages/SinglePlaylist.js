@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { SongChart } from "../components/SongChart";
 import SongList from "../components/SongList";
@@ -80,20 +80,25 @@ export const SinglePlaylist = () => {
           </p>
 
           {details.description.length > 0 ? (
-            <p className="w-5/6 lg:w-[27rem] text-center sm:text-left">{details.description}</p>
+            <p className="w-5/6 lg:w-[27rem] text-center sm:text-left">
+              {details.description}
+            </p>
           ) : (
             ""
           )}
           <p className="text-gray-200   capitalize  ">
             {details.tracks.items.length} tracks
           </p>
-          <button className="text-white w-max text-sm md:text-base rounded-md px-4 py-2 bg-green-600 hover:bg-green-500">
+          <Link
+            to={`/recommendation/${details.id}`}
+            className="text-white w-max text-sm md:text-base rounded-md px-4 py-2 bg-green-600 hover:bg-green-500"
+          >
             Get Recommendations
-          </button>
+          </Link>
         </div>
       </div>
       <div className="w-full flex-col sm:flex-row justify-between flex gap-12 my-12">
-        <div >
+        <div>
           <SongChart features={features} page="playlist" />
         </div>
         <div className="w-full">

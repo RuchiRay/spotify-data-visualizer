@@ -10,7 +10,6 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 export const SongChart = ({ features,page }) => {
-  console.log(page);
   const classname ={
     playlist:'md:h-[250px] md:w-[250px] lg:h-[350px] lg:w-[350px]',
     song:'w-full  md:w-[650px] md:h-[550px]'
@@ -43,7 +42,6 @@ export const SongChart = ({ features,page }) => {
   ];
   const { acousticness, danceability, energy, liveness, speechiness, valence } =
     features;
-  console.log(features);
   const chartData = [
     acousticness,
     danceability,

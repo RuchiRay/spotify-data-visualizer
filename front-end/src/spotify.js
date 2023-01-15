@@ -167,4 +167,14 @@ export const getPlaylist = (id) => {
 export const getPlaylistTracks = (id) => {
   return axios.get(`/playlists/${id}/tracks`);
 };
+export const getRecommendationFromPlaylist = (tracks) => {
+  tracks = tracks.sort(() => Math.random() - 0.5);
+  const seedTracks = tracks.slice(0, 5);
+  const ids = getTrackIds(seedTracks);
+  const seed_artists = "";
+  const seed_genres = "";
+  return axios.get(
+    `/recommendations?seed_tracks=${ids}&seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=50`
+  );
+};
 const getTrackIds = (tracks) => tracks.map(({ track }) => track.id).join(",");
