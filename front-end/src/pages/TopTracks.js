@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTopTracks } from "../spotify";
-import { catchErrors ,formatTime} from "../utils";
+import { catchErrors, formatTime } from "../utils";
 import Loader from "../components/Loader";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -27,10 +27,7 @@ const TopTracks = () => {
     };
     catchErrors(fetchData());
   }, [term]);
-  if (loading)
-    return (
-        <Loader />
-    );
+  if (loading) return <Loader />;
   return (
     <div className="w-full">
       <div className="flex gap-4 mb-12 flex-wrap justify-between items-baseline">
@@ -54,13 +51,11 @@ const TopTracks = () => {
         </div>
       </div>
       <ul>
-              {tracks.map((item) => {
-                const { album, artists, duration_ms, id, name } = item;
-                return (
-                <SongList key={id} props ={item}/>
-                );
-              })}
-            </ul>
+        {tracks.map((item) => {
+          const { album, artists, duration_ms, id, name } = item;
+          return <SongList key={id} props={item} />;
+        })}
+      </ul>
     </div>
   );
 };

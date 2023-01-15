@@ -9,7 +9,12 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-export const SongChart = ({ features }) => {
+export const SongChart = ({ features,page }) => {
+  console.log(page);
+  const classname ={
+    playlist:'md:h-[250px] md:w-[250px] lg:h-[350px] lg:w-[350px]',
+    song:'w-full  md:w-[650px] md:h-[550px]'
+  }
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
   const options = {
     responsive: true,
@@ -74,7 +79,7 @@ export const SongChart = ({ features }) => {
     ],
   };
   return (
-    <div className="w-full  md:w-[650px] md:h-[550px]">
+    <div className={classname[page]}>
       <Bar options={options} data={data} />
     </div>
   );

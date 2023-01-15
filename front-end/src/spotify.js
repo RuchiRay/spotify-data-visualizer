@@ -149,18 +149,22 @@ export const getRelatedArtists = (id) => {
   return axios.get(`/artists/${id}/related-artists`);
 };
 export const checkFollow = (id) => {
-  return axios.get(
-    `/me/following/contains?type=artist&ids=${id}`
-  );
+  return axios.get(`/me/following/contains?type=artist&ids=${id}`);
 };
 export const getTrackDetails = (id) => {
-  return axios.get(
-    `/tracks/${id}`
-  );
+  return axios.get(`/tracks/${id}`);
 };
 export const getAudioFeature = (id) => {
-  return axios.get(
-    `/audio-features/${id}`
-  );
+  return axios.get(`/audio-features/${id}`);
 };
-
+export const getTracksFeature = (tracks) => {
+  const ids = getTrackIds(tracks);
+  return axios.get(`/audio-features/?ids=${ids}`);
+};
+export const getPlaylist = (id) => {
+  return axios.get(`/playlists/${id}`);
+};
+export const getPlaylistTracks = (id) => {
+  return axios.get(`/playlists/${id}/tracks`);
+};
+const getTrackIds = (tracks) => tracks.map(({ track }) => track.id).join(",");

@@ -16,6 +16,7 @@ import {
 import { SingleArtist } from "./pages/SingleArtist";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { SingleSong } from "./pages/SingleSong";
+import { SinglePlaylist } from "./pages/SinglePlaylist";
 function App() {
   const [token, setToken] = useState(null);
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="liked-songs" element={<LikedSongs />} />
           <Route path="artist/:artistId" element={<SingleArtist />} />
           <Route path="songs/:songId" element={<SingleSong />} />
+          <Route path="playlist/:playlistId" element={<SinglePlaylist />} />
         </Route>
       </Routes>
     </BrowserRouter>
