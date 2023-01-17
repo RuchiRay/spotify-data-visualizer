@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import SongList from "../components/SongList";
-import { getRecommendationFromSongs, getTrackDetails } from "../spotify";
+import { addItemsToPlaylist,getCurrentUserProfile ,createPlaylist, getRecommendationFromSongs, getTrackDetails } from "../spotify";
 import { catchErrors } from "../utils";
 
 export const RecommendationFromSong = () => {
@@ -10,12 +10,16 @@ export const RecommendationFromSong = () => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [tracks, setTracks] = useState([]);
+  const [userId, setUserId] = useState('')
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrackDetails(recSongId);
       const seed_artists = getArtistId(data.data.artists);
       const seed_tracks = data.data.id;
       const songs = await getRecommendationFromSongs(seed_artists, seed_tracks);
+      const user = await getCurrentUserProfile()
+      setUserId(user.data.id)
       setName(data.data.name);
       setTracks(songs.data.tracks);
       setLoading(false);
@@ -35,6 +39,22 @@ export const RecommendationFromSong = () => {
     };
   }, []);
 
+  const addPlaylist = async() => {
+    console.log("click");
+    const req = {
+      name: `Recommended tracks based on ${name}`,
+      description: ``,
+    };
+    const createdPlaylist = await createPlaylist(req,userId)
+    const playlistId = createdPlaylist.data.id
+    let uris = tracks.map((item)=>{
+      return item.uri
+    })
+    uris = uris.join(',')
+    const added = await addItemsToPlaylist(uris,playlistId)
+    console.log(added);
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -46,7 +66,7 @@ export const RecommendationFromSong = () => {
           <span className="text-green-500 text-2xl">{name}</span>
         </p>
         <button
-          // onClick={addPlaylist}
+          onClick={addPlaylist}
           className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md h-max text-white"
         >
           Save this playlist
