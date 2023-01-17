@@ -17,6 +17,8 @@ export const RecommendationFromSong = () => {
   const [tracks, setTracks] = useState([]);
   const [userId, setUserId] = useState("");
   const [showAlert, setShowAlert] = useState(false);
+  const [recPlaylistId, setRecPlaylistId] = useState("");
+  const [showLinkButton, setShowLinkButton] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const data = await getTrackDetails(recSongId);
@@ -51,12 +53,14 @@ export const RecommendationFromSong = () => {
     };
     const createdPlaylist = await createPlaylist(req, userId);
     const playlistId = createdPlaylist.data.id;
+    setRecPlaylistId(playlistId);
     let uris = tracks.map((item) => {
       return item.uri;
     });
     uris = uris.join(",");
     const added = await addItemsToPlaylist(uris, playlistId);
     setShowAlert(true);
+    setShowLinkButton(true);
     setTimeout(() => {
       setShowAlert(false);
     }, 5000);
@@ -74,12 +78,23 @@ export const RecommendationFromSong = () => {
           Recommendation based on{" "}
           <span className="text-green-500 text-2xl">{name}</span>
         </p>
-        <button
-          onClick={addPlaylist}
-          className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md h-max text-white"
-        >
-          Save this playlist
-        </button>
+        {showLinkButton ? (
+          <a
+            href={`https://open.spotify.com/playlist/${recPlaylistId}`}
+            className="border border-white px-4 py-2 rounded-md h-max text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in Spotify
+          </a>
+        ) : (
+          <button
+            onClick={addPlaylist}
+            className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md h-max text-white"
+          >
+            Save this playlist
+          </button>
+        )}
       </div>
       <ul>
         {tracks.map((item) => {

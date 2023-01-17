@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Alert,Loader,SongList } from '../components';
+import { Alert, Loader, SongList } from "../components";
 import {
   addItemsToPlaylist,
   createPlaylist,
@@ -17,15 +17,16 @@ export const RecommendationFromPlaylist = () => {
   const [songs, setSongs] = useState([]);
   const [name, setName] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-  const [userId, setUserId] = useState('')
-
+  const [userId, setUserId] = useState("");
+  const [recPlaylistId, setRecPlaylistId] = useState("");
+  const [showLinkButton, setShowLinkButton] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const tracks = await getPlaylistTracks(recId);
       const playlist = await getPlaylist(recId);
       const recData = await getRecommendationFromPlaylist(tracks.data.items);
-      const user = await getCurrentUserProfile()
-      setUserId(user.data.id)
+      const user = await getCurrentUserProfile();
+      setUserId(user.data.id);
       setSongs(recData.data.tracks);
       setName(playlist.data.name);
       setLoading(false);
@@ -33,20 +34,22 @@ export const RecommendationFromPlaylist = () => {
     catchErrors(fetchData());
   }, []);
 
-  const addPlaylist = async() => {
+  const addPlaylist = async () => {
     console.log("click");
     const req = {
       name: `Recommended tracks based on ${name}`,
       description: ``,
     };
-    const createdPlaylist = await createPlaylist(req,userId)
-    const playlistId = createdPlaylist.data.id
-    let uris = songs.map((item)=>{
-      return item.uri
-    })
-    uris = uris.join(',')
-    const added = await addItemsToPlaylist(uris,playlistId)
+    const createdPlaylist = await createPlaylist(req, userId);
+    const playlistId = createdPlaylist.data.id;
+    setRecPlaylistId(playlistId);
+    let uris = songs.map((item) => {
+      return item.uri;
+    });
+    uris = uris.join(",");
+    const added = await addItemsToPlaylist(uris, playlistId);
     setShowAlert(true);
+    setShowLinkButton(true);
     setTimeout(() => {
       setShowAlert(false);
     }, 5000);
@@ -59,17 +62,28 @@ export const RecommendationFromPlaylist = () => {
   return (
     <div className="relative">
       <div className="flex w-full justify-between">
-      {showAlert ? <Alert /> : ""}
+        {showAlert ? <Alert /> : ""}
         <p className="text-xl font-semibold text-gray-100 mb-12">
           Recommendation based on{" "}
           <span className="text-green-500 text-2xl">{name}</span>
         </p>
-        <button
-          onClick={addPlaylist}
-          className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md h-max text-white"
-        >
-          Save this playlist
-        </button>
+        {showLinkButton ? (
+          <a
+            href={`https://open.spotify.com/playlist/${recPlaylistId}`}
+            className="border border-white px-4 py-2 rounded-md h-max text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in Spotify
+          </a>
+        ) : (
+          <button
+            onClick={addPlaylist}
+            className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md h-max text-white"
+          >
+            Save this playlist
+          </button>
+        )}
       </div>
 
       <ul>
