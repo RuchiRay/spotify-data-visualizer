@@ -4,7 +4,6 @@ import { BsSpotify,BsFillEmojiHeartEyesFill,BsFillHeartFill } from "react-icons/
 import { FaUser, FaMusic } from "react-icons/fa";
 import { BiTime } from "react-icons/bi";
 import { GiMusicalScore, GiMicrophone } from "react-icons/gi";
-import { logout } from "../spotify";
 const Home = () => {
   return (
     <div className="flex flex-col-reverse md:flex-row w-full text-gray-400">

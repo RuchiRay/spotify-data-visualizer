@@ -10,11 +10,13 @@ import {
   getTopArtists,
   getTopTracks,
   getMorePlaylists,
+  logout
 } from "../spotify";
 import { catchErrors, formatTime } from "../utils";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import SongList from "../components/SongList";
+
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [following, setFollowing] = useState(null);
@@ -30,7 +32,7 @@ const Profile = () => {
       const user = await getCurrentUserProfile();
       const followingArtists = await getFollowingArtist();
       const userPlaylists = await getUserPlaylists();
-      const userEpisodes = await getUserEpisodes();
+      // const userEpisodes = await getUserEpisodes();
       const userAlbums = await getUserAlbums();
       const userTracks = await getUserTracks();
       const userTopTracks = await getTopTracks("long_term", 10);
@@ -39,12 +41,12 @@ const Profile = () => {
       setPlaylists(userPlaylists.data);
       setProfile(user.data);
       setFollowing(followingArtists.data.artists.total);
-      setEpisodes(userEpisodes.data);
+      // setEpisodes(userEpisodes.data);
       setAlbums(userAlbums.data);
       setLikedSongs(userTracks.data);
       setTopTracks(userTopTracks.data.items);
       setTopArtists(userTopArtists.data.items);
-
+      // console.log(userEpisodes);
       setIsLoading(false);
     };
     catchErrors(fetchData());
@@ -72,9 +74,10 @@ const Profile = () => {
             )}
           </div>
         </div>
-        <p className="text-3xl md:text-5xl semi-bold my-6 md:my-12 text-green-500">
+        <p className="text-3xl md:text-5xl semi-bold my-6 md:my-6 text-green-500">
           {profile.display_name}
         </p>
+        <button onClick={()=>logout()} className="rounded-md border border-green-500 text-white px-8 hover:bg-green-500 py-1 mb-6">Logout</button>
         <div className="flex flex-wrap justify-center gap-8 text-lg md:text-2xl">
           <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center  w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{profile.followers.total}</p>
@@ -88,10 +91,10 @@ const Profile = () => {
             <p className="text-green-400">{playlists.total}</p>
             <p className="text-base">Playlists</p>
           </div>
-          <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
+          {/* <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{episodes.total}</p>
             <p className="text-base">Episodes</p>
-          </div>
+          </div> */}
           <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{albums.total}</p>
             <p className="text-base">Albums</p>
