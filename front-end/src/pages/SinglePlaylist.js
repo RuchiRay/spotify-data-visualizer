@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
-import { SongChart,SongList,Loader } from "../components";
+import { MdDelete } from "react-icons/md";
+import { Link, useParams,useNavigate } from "react-router-dom";
+import { SongChart, SongList, Loader, Alert } from "../components";
 import {
   getAudioFeature,
   getPlaylist,
   getPlaylistTracks,
   getTrackDetails,
   getTracksFeature,
+  unfollowPlaylist,
 } from "../spotify";
 import { catchErrors, findYear, formatTime } from "../utils";
 
- const SinglePlaylist = () => {
+const SinglePlaylist = () => {
   let { playlistId } = useParams();
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [features, setFeatures] = useState([]);
   const [tracks, setTracks] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       const data = await getPlaylist(playlistId);
       const featureData = await getTracksFeature(data.data.tracks.items);
       const tracks = await getPlaylistTracks(playlistId);
-      console.log(data);
       const featureArray = featureData.data.audio_features;
       const sum = featureArray.reduce(sum_reducer, 0);
       const properties = [
@@ -35,13 +38,11 @@ import { catchErrors, findYear, formatTime } from "../utils";
         "valence",
       ];
       let featureObj = {};
-      if(data.data.tracks.items.length>0){
+      if (data.data.tracks.items.length > 0) {
         const avgArray = properties.map((property) => {
           const propertyArr = featureArray.map((item) => {
-           if(item)
-            return item[property];
-            else
-            return 0
+            if (item) return item[property];
+            else return 0;
           });
           const sum = propertyArr.reduce(sum_reducer, 0);
           const avg = sum / featureArray.length;
@@ -49,7 +50,7 @@ import { catchErrors, findYear, formatTime } from "../utils";
           return { [property]: avg };
         });
       }
-     
+
       setDetails(data.data);
       setTracks(tracks.data.items);
       setFeatures(featureObj);
@@ -60,11 +61,27 @@ import { catchErrors, findYear, formatTime } from "../utils";
   const sum_reducer = (accumulator, currentValue) => {
     return accumulator + currentValue;
   };
+
+  const deletePlaylist = async () => {
+    const data = await unfollowPlaylist(playlistId);
+    setShowAlert(true);
+    setTimeout(() => {
+      navigate("/playlists");
+    }, 1000);
+    setTimeout(() => {
+      setShowAlert(false);
+      
+    }, 2000);
+    console.log(data);
+    console.log("click");
+  };
+
   if (loading) {
     return <Loader />;
   }
   return (
-    <div className="w-full">
+    <div className="w-full relative">
+      {showAlert ? <Alert message = 'Playlist deleted from your library' /> : ""}
       <div className="w-full flex items-center sm:items-end flex-col sm:flex-row  gap-8 ">
         <div className="w-64 h-64 lg:w-72 lg:h-72 shrink-0">
           {details.images[0]?.url ? (
@@ -93,12 +110,21 @@ import { catchErrors, findYear, formatTime } from "../utils";
           <p className="text-gray-200   capitalize  ">
             {details.tracks.items.length} tracks
           </p>
-          <Link
-            to={`/recommendation/${details.id}`}
-            className="text-white w-max text-sm md:text-base rounded-md px-4 py-2 bg-green-600 hover:bg-green-500"
-          >
-            Get Recommendations
-          </Link>
+          <div className="flex gap-6">
+            <Link
+              to={`/recommendation/${details.id}`}
+              className="text-white w-max text-sm md:text-base rounded-md px-4 py-2 bg-green-600 hover:bg-green-500"
+            >
+              Get Recommendations
+            </Link>
+            <button
+              onClick={deletePlaylist}
+              className="flex gap-1 text-white items-center text-sm md:text-base rounded-md px-4 py-2 bg-red-600 hover:bg-red-700"
+            >
+              <MdDelete className="text-xl" />
+              <p>Delete</p>
+            </button>
+          </div>
         </div>
       </div>
       <div className="w-full flex-col sm:flex-row justify-between flex gap-12 my-12">
@@ -116,4 +142,4 @@ import { catchErrors, findYear, formatTime } from "../utils";
     </div>
   );
 };
-export default SinglePlaylist
+export default SinglePlaylist;

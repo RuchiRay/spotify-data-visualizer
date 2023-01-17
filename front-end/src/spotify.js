@@ -194,3 +194,9 @@ export const createPlaylist = (req, id) => {
 export const addItemsToPlaylist = (uris,id)=>{
   return axios.post(`/playlists/${id}/tracks?uris=${uris}`)
 }
+
+
+// unfollowing playlist and artists
+export const unfollowPlaylist = (id)=>{
+  return axios.delete(`playlists/${id}/followers`)
+}
