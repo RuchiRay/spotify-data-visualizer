@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import Loader from "../components/Loader";
-import SongList from "../components/SongList";
+import { Loader, SongList, Alert } from "../components";
 import {
   checkFollow,
   getArtist,
   getArtistsTopSongs,
   getRelatedArtists,
+  putFollowArtist,
 } from "../spotify";
 import { catchErrors, formatNumber } from "../utils";
- const SingleArtist = () => {
+const SingleArtist = () => {
   let { artistId } = useParams();
   const [artist, setArtist] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -19,14 +19,15 @@ import { catchErrors, formatNumber } from "../utils";
   const [follow, setFollow] = useState(false);
   const [show, setShow] = useState(false);
   const [showValue, setShowValue] = useState(5);
+  const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const fetchData = async () => {
       const data = await getArtist(artistId);
       const val = await checkFollow(data.data.id);
       let songdata = await getArtistsTopSongs(data.data.id);
       const related = await getRelatedArtists(data.data.id);
-      console.log(val.data[0],'check follow');
+      console.log(val.data[0], "check follow");
       setRelatedArtists(related.data.artists);
       songdata = songdata.data.tracks;
       const newsongdata = songdata.slice(0, 5);
@@ -41,18 +42,34 @@ import { catchErrors, formatNumber } from "../utils";
     setShow(!show);
   };
   useEffect(() => {
-   if(show)
-   setShowValue(20)
-   else
-   setShowValue(5)
-  }, [show])
-  
+    if (show) setShowValue(20);
+    else setShowValue(5);
+  }, [show]);
+
+  const followArtist = async () => {
+    const data = await putFollowArtist(artistId);
+    setShowAlert(true);
+    setFollow(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+    console.log(data);
+  };
+
   if (loading) {
     return <Loader />;
   }
   return (
     <div className="-m-4 lg:-m-8 xl:-m-16">
-      <div className="p-4 lg:p-8 xl:p-16 w-full flex items-end  gap-8 bg-gradient-to-r from-black to-gray-400">
+      <div className="relative p-4 lg:p-8 xl:p-16 w-full flex items-end  gap-8 bg-gradient-to-r from-black to-gray-400">
+        {showAlert ? (
+          <div className="absolute top-12 left-2/4 -translate-x-2/4 py-3 rounded-md bg-blue-400 w-72 text-lg text-center text-white">
+           {artist.name} followed
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className=" w-28 h-28 md:w-40 md:h-40 lg:w-56 lg:h-56 shrink-0">
           {artist.images[0]?.url ? (
             <img src={artist.images[0].url} alt="" />
@@ -63,7 +80,9 @@ import { catchErrors, formatNumber } from "../utils";
           )}
         </div>
         <div>
-          <p className="text-gray-100 text-3xl md:text-6xl lg:text-8xl font-semibold">{artist.name}</p>
+          <p className="text-gray-100 text-3xl md:text-6xl lg:text-8xl font-semibold">
+            {artist.name}
+          </p>
           <div className="text-gray-100 text-lg">
             <span>{formatNumber(artist.followers.total)} </span>
             <span>Followers</span>
@@ -76,10 +95,18 @@ import { catchErrors, formatNumber } from "../utils";
             <span>Popularity</span>{" "}
             <span className="text-xl text-gray-200">{artist.popularity}%</span>
           </p>
-
-          <button className="border text-green-500 text-sm uppercase border-green-500 px-4 py-2 rounded-md ">
-            {follow ? "following" : "follow"}
-          </button>
+          {follow ? (
+            <button className="border text-green-500 text-sm uppercase border-green-500 px-4 py-2 rounded-md ">
+              following
+            </button>
+          ) : (
+            <button
+              onClick={followArtist}
+              className="border border-white text-white  text-sm uppercase px-4 py-2 rounded-md "
+            >
+              follow
+            </button>
+          )}
 
           <div className="flex items-center flex-wrap gap-4 ">
             <p>Genre</p>
@@ -118,7 +145,7 @@ import { catchErrors, formatNumber } from "../utils";
               onClick={toggleArtists}
               className="hover:underline text-sm lg:text-base text-gray-300 hover:text-gray-100 cursor-pointer"
             >
-              {show?'See less':'See more'}
+              {show ? "See less" : "See more"}
             </button>
           </div>
           <div className="grid gap-8 grid-cols-custom2">
@@ -162,4 +189,4 @@ import { catchErrors, formatNumber } from "../utils";
     </div>
   );
 };
-export default SingleArtist
+export default SingleArtist;

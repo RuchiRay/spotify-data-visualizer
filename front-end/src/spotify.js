@@ -200,3 +200,6 @@ export const addItemsToPlaylist = (uris,id)=>{
 export const unfollowPlaylist = (id)=>{
   return axios.delete(`playlists/${id}/followers`)
 }
+export const putFollowArtist = (id)=>{
+  return axios.put(`me/following?type=artist&ids=${id}`)
+}
