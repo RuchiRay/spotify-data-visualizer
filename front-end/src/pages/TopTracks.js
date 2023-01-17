@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getTopTracks } from "../spotify";
-import { catchErrors, formatTime } from "../utils";
+import { catchErrors } from "../utils";
 import Loader from "../components/Loader";
-import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import SongList from "../components/SongList";
 
 const TopTracks = () => {
@@ -32,7 +30,7 @@ const TopTracks = () => {
     <div className="w-full">
       <div className="flex gap-4 mb-12 flex-wrap justify-between items-baseline">
         <p className="text-gray-100 text-lg md:text-2xl  font-semibold">
-          Your Playlist
+          Your Top Tracks
         </p>
         <div className="flex gap-2 flex-wrap md:gap-8 text-gray-100">
           {terms.map((item) => {
@@ -52,7 +50,7 @@ const TopTracks = () => {
       </div>
       <ul>
         {tracks.map((item) => {
-          const { album, artists, duration_ms, id, name } = item;
+          const { id } = item;
           return <SongList key={id} props={item} />;
         })}
       </ul>

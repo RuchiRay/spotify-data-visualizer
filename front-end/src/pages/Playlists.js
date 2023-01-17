@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { getUserPlaylists } from "../spotify";
-import { catchErrors, formatTime } from "../utils";
+import { catchErrors } from "../utils";
 const Playlists = () => {
   const [playlists, setPlaylists] = useState(null);
   const [loading, setLoading] = useState(true);

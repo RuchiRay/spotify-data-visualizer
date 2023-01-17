@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import { getRecentlyPlayed } from "../spotify";
-import { catchErrors ,formatTime} from "../utils";
-import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { catchErrors } from "../utils";
 import SongList from "../components/SongList";
 const Recent = () => {
   const [recent, setRecent] = useState(null);
@@ -29,7 +27,6 @@ const Recent = () => {
       <ul>
         {recent.map((item) => {
           const { track,played_at } = item;
-          const {album,artists,duration_ms,name,id} = track
           return (
            <SongList key={played_at} props={track}/>
           );

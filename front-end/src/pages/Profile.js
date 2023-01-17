@@ -4,15 +4,13 @@ import {
   getCurrentUserProfile,
   getFollowingArtist,
   getUserPlaylists,
-  getUserEpisodes,
   getUserAlbums,
   getUserTracks,
   getTopArtists,
   getTopTracks,
-  getMorePlaylists,
-  logout
+  logout,
 } from "../spotify";
-import { catchErrors, formatTime } from "../utils";
+import { catchErrors } from "../utils";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import SongList from "../components/SongList";
@@ -22,7 +20,6 @@ const Profile = () => {
   const [following, setFollowing] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [playlists, setPlaylists] = useState(null);
-  const [episodes, setEpisodes] = useState(null);
   const [albums, setAlbums] = useState(null);
   const [likedSongs, setLikedSongs] = useState(null);
   const [topArtists, setTopArtists] = useState([]);
@@ -32,29 +29,24 @@ const Profile = () => {
       const user = await getCurrentUserProfile();
       const followingArtists = await getFollowingArtist();
       const userPlaylists = await getUserPlaylists();
-      // const userEpisodes = await getUserEpisodes();
       const userAlbums = await getUserAlbums();
       const userTracks = await getUserTracks();
       const userTopTracks = await getTopTracks("long_term", 10);
       const userTopArtists = await getTopArtists("long_term", 10);
-      const morePlaylists = await getMorePlaylists(user.data.id);
+      // const morePlaylists = await getMorePlaylists(user.data.id);
       setPlaylists(userPlaylists.data);
       setProfile(user.data);
       setFollowing(followingArtists.data.artists.total);
-      // setEpisodes(userEpisodes.data);
       setAlbums(userAlbums.data);
       setLikedSongs(userTracks.data);
       setTopTracks(userTopTracks.data.items);
       setTopArtists(userTopArtists.data.items);
-      // console.log(userEpisodes);
       setIsLoading(false);
     };
     catchErrors(fetchData());
   }, []);
   if (isLoading) {
-    return (
-        <Loader />
-    );
+    return <Loader />;
   }
   return (
     <div className="w-full">
@@ -77,7 +69,12 @@ const Profile = () => {
         <p className="text-3xl md:text-5xl semi-bold my-6 md:my-6 text-green-500">
           {profile.display_name}
         </p>
-        <button onClick={()=>logout()} className="rounded-md border border-green-500 text-white px-8 hover:bg-green-500 py-1 mb-6">Logout</button>
+        <button
+          onClick={() => logout()}
+          className="rounded-md border border-green-500 text-white px-8 hover:bg-green-500 py-1 mb-6"
+        >
+          Logout
+        </button>
         <div className="flex flex-wrap justify-center gap-8 text-lg md:text-2xl">
           <div className="bg-[rgba(256,256,256,0.07)] flex flex-col justify-center items-center  w-28 h-20 md:w-36 md:h-24">
             <p className="text-green-400">{profile.followers.total}</p>
@@ -163,13 +160,10 @@ const Profile = () => {
             </div>
             <ul>
               {topTracks.map((item) => {
-                const { album, artists, duration_ms, id, name } = item;
-                return (
-                <SongList key={id} props = {item}/>
-                );
+                const {  id } = item;
+                return <SongList key={id} props={item} />;
               })}
             </ul>
-          
           </div>
         </div>
       </div>

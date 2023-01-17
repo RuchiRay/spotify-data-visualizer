@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import { Loader, SongList, Alert } from "../components";
+import { Loader, SongList } from "../components";
 import {
   checkFollow,
   getArtist,
@@ -131,7 +131,7 @@ const SingleArtist = () => {
           </p>
           <ul>
             {songs.map((item) => {
-              const { album, artists, duration_ms, id, name } = item;
+              const { id } = item;
               return <SongList key={id} props={item} />;
             })}
           </ul>

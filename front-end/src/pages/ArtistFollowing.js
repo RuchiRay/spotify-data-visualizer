@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getFollowingArtist, getTopArtists } from "../spotify";
-import { catchErrors, formatTime } from "../utils";
+import { getFollowingArtist } from "../spotify";
+import { catchErrors } from "../utils";
 import Loader from "../components/Loader";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";

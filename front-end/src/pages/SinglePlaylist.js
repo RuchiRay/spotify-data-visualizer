@@ -4,14 +4,12 @@ import { MdDelete } from "react-icons/md";
 import { Link, useParams,useNavigate } from "react-router-dom";
 import { SongChart, SongList, Loader, Alert } from "../components";
 import {
-  getAudioFeature,
   getPlaylist,
   getPlaylistTracks,
-  getTrackDetails,
   getTracksFeature,
   unfollowPlaylist,
 } from "../spotify";
-import { catchErrors, findYear, formatTime } from "../utils";
+import { catchErrors } from "../utils";
 
 const SinglePlaylist = () => {
   let { playlistId } = useParams();

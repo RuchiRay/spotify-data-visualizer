@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { Alert, Loader, SongList } from "../components";
 import {
   addItemsToPlaylist,

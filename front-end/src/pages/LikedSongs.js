@@ -25,8 +25,8 @@ const Recent = () => {
       </p>
       <ul>
         {likedSongs.map((item) => {
-          const { track,played_at } = item;
-          const {album,artists,duration_ms,name,id} = track
+          const { track } = item;
+          const {id} = track
           return (
            <SongList key={id} props = {track} />
           );
