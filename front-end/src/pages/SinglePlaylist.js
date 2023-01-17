@@ -22,6 +22,7 @@ import { catchErrors, findYear, formatTime } from "../utils";
       const data = await getPlaylist(playlistId);
       const featureData = await getTracksFeature(data.data.tracks.items);
       const tracks = await getPlaylistTracks(playlistId);
+      console.log(data);
       const featureArray = featureData.data.audio_features;
       const sum = featureArray.reduce(sum_reducer, 0);
       const properties = [
@@ -37,7 +38,10 @@ import { catchErrors, findYear, formatTime } from "../utils";
       if(data.data.tracks.items.length>0){
         const avgArray = properties.map((property) => {
           const propertyArr = featureArray.map((item) => {
+           if(item)
             return item[property];
+            else
+            return 0
           });
           const sum = propertyArr.reduce(sum_reducer, 0);
           const avg = sum / featureArray.length;
@@ -53,7 +57,6 @@ import { catchErrors, findYear, formatTime } from "../utils";
     };
     catchErrors(fetchData());
   }, []);
-console.log(tracks);
   const sum_reducer = (accumulator, currentValue) => {
     return accumulator + currentValue;
   };
