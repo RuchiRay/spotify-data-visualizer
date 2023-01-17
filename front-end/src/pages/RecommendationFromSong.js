@@ -72,11 +72,11 @@ export const RecommendationFromSong = () => {
   }
   return (
     <div className="relative">
-      <div className="flex w-full justify-between">
+      <div className="flex gap-4 mb-12 flex-wrap w-full justify-between">
       {showAlert ? <Alert /> : ""}
-        <p className="text-xl font-semibold text-gray-100 mb-12">
+        <p className="text-base lg:text-xl font-semibold text-gray-100 ">
           Recommendation based on{" "}
-          <span className="text-green-500 text-2xl">{name}</span>
+          <span className="text-green-500 text-lg lg:text-2xl">{name}</span>
         </p>
         {showLinkButton ? (
           <a
