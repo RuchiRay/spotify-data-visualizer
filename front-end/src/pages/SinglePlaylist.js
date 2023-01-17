@@ -36,15 +36,18 @@ export const SinglePlaylist = () => {
         "valence",
       ];
       let featureObj = {};
-      const avgArray = properties.map((property) => {
-        const propertyArr = featureArray.map((item) => {
-          return item[property];
+      if(data.data.tracks.items.length>0){
+        const avgArray = properties.map((property) => {
+          const propertyArr = featureArray.map((item) => {
+            return item[property];
+          });
+          const sum = propertyArr.reduce(sum_reducer, 0);
+          const avg = sum / featureArray.length;
+          featureObj = { ...featureObj, [property]: avg };
+          return { [property]: avg };
         });
-        const sum = propertyArr.reduce(sum_reducer, 0);
-        const avg = sum / featureArray.length;
-        featureObj = { ...featureObj, [property]: avg };
-        return { [property]: avg };
-      });
+      }
+     
       setDetails(data.data);
       setTracks(tracks.data.items);
       setFeatures(featureObj);
@@ -52,7 +55,7 @@ export const SinglePlaylist = () => {
     };
     catchErrors(fetchData());
   }, []);
-
+console.log(tracks);
   const sum_reducer = (accumulator, currentValue) => {
     return accumulator + currentValue;
   };

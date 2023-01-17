@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { getUserPlaylists } from "../spotify";
@@ -31,7 +32,13 @@ const Playlists = () => {
               className="bg-[rgba(256,256,256,0.07)] cursor-pointer rounded-md   px-6 py-5"
             >
               <div>
-                <img className="rounded-md" src={images[0].url} alt="" />
+                {images[0]?.url ? (
+                    <img src={images[0].url} alt="" className="rounded-md" />
+                  ) : (
+                    <div>
+                      <FaUser />
+                    </div>
+                  )}
               </div>
               <p className="mt-4 text-gray-200 text-center">{name}</p>
               <p className="text-sm text-center mt-2">{tracks.total} TRACKS</p>
