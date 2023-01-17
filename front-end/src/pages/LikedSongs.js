@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Loader from "../components/Loader";
 import { getUserTracks } from "../spotify";
 import { catchErrors } from "../utils";
-import SongList from "../components/SongList";
+import {SongList,Loader} from "../components";
 const Recent = () => {
   const [likedSongs, setRecent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

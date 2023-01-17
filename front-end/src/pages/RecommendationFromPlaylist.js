@@ -11,7 +11,7 @@ import {
 } from "../spotify";
 import { catchErrors } from "../utils";
 
-export const RecommendationFromPlaylist = () => {
+ const RecommendationFromPlaylist = () => {
   let { recId } = useParams();
   const [loading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
@@ -94,3 +94,4 @@ export const RecommendationFromPlaylist = () => {
     </div>
   );
 };
+export default RecommendationFromPlaylist

@@ -9,7 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-export const SongChart = ({ features,page }) => {
+ const SongChart = ({ features,page }) => {
   const classname ={
     playlist:'md:h-[250px] md:w-[250px] lg:h-[350px] lg:w-[350px]',
     song:'w-full  md:w-[650px] md:h-[550px]'
@@ -82,3 +82,4 @@ export const SongChart = ({ features,page }) => {
     </div>
   );
 };
+export default SongChart

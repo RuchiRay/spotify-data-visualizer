@@ -10,7 +10,7 @@ import {
   getRelatedArtists,
 } from "../spotify";
 import { catchErrors, formatNumber } from "../utils";
-export const SingleArtist = () => {
+ const SingleArtist = () => {
   let { artistId } = useParams();
   const [artist, setArtist] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -162,3 +162,4 @@ export const SingleArtist = () => {
     </div>
   );
 };
+export default SingleArtist

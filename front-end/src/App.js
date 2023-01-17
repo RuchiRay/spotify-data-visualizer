@@ -12,13 +12,13 @@ import {
   TopTracks,
   ArtistFollowing,
   LikedSongs,
+  SingleArtist,
+  RecommendationFromPlaylist,
+  RecommendationFromSong,
+  SingleSong,
+  SinglePlaylist
 } from "./pages";
-import { SingleArtist } from "./pages/SingleArtist";
-import { ScrollToTop } from "./components/ScrollToTop";
-import { SingleSong } from "./pages/SingleSong";
-import { SinglePlaylist } from "./pages/SinglePlaylist";
-import { RecommendationFromPlaylist } from "./pages/RecommendationFromPlaylist";
-import { RecommendationFromSong } from "./pages/RecommendationFromSong";
+import { ScrollToTop } from "./components";
 function App() {
   const [token, setToken] = useState(null);
 

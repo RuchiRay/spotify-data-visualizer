@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import Loader from "../components/Loader";
-import { SongChart } from "../components/SongChart";
+import { SongChart,Loader } from "../components";
 import { getAudioFeature, getTrackDetails } from "../spotify";
 import { catchErrors, findYear, formatTime } from "../utils";
 
-export const SingleSong = () => {
+ const SingleSong = () => {
   let { songId } = useParams();
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -85,3 +84,4 @@ export const SingleSong = () => {
     </div>
   );
 };
+export default SingleSong

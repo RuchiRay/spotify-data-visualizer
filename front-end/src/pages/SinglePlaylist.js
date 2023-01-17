@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import Loader from "../components/Loader";
-import { SongChart } from "../components/SongChart";
-import SongList from "../components/SongList";
+import { SongChart,SongList,Loader } from "../components";
 import {
   getAudioFeature,
   getPlaylist,
@@ -13,7 +11,7 @@ import {
 } from "../spotify";
 import { catchErrors, findYear, formatTime } from "../utils";
 
-export const SinglePlaylist = () => {
+ const SinglePlaylist = () => {
   let { playlistId } = useParams();
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -115,3 +113,4 @@ console.log(tracks);
     </div>
   );
 };
+export default SinglePlaylist
