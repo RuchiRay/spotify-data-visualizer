@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Loader from "../components/Loader";
-import SongList from "../components/SongList";
+import { Alert,Loader,SongList } from '../components';
 import {
   addItemsToPlaylist,
   createPlaylist,
@@ -47,6 +46,10 @@ export const RecommendationFromPlaylist = () => {
     })
     uris = uris.join(',')
     const added = await addItemsToPlaylist(uris,playlistId)
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
     console.log(added);
   };
 
@@ -54,8 +57,9 @@ export const RecommendationFromPlaylist = () => {
     return <Loader />;
   }
   return (
-    <div>
+    <div className="relative">
       <div className="flex w-full justify-between">
+      {showAlert ? <Alert /> : ""}
         <p className="text-xl font-semibold text-gray-100 mb-12">
           Recommendation based on{" "}
           <span className="text-green-500 text-2xl">{name}</span>
