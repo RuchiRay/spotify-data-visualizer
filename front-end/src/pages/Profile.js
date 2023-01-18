@@ -52,17 +52,15 @@ const Profile = () => {
     <div className="w-full">
       <div className="w-full flex flex-col justify-center items-center">
         <div className="mt-8 md:mt-0 w-36 h-36 sm:w-48 sm:h-48  lg:w-64 lg:h-64 rounded-full bg-[rgba(256,256,256,0.07)] shadow-5xl flex justify-center items-center">
-          <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-60 lg:h-60">
-            {profile.images[0].url ? (
+          <div className="w-32 flex justify-center items-center h-32 sm:w-40 sm:h-40 lg:w-60 lg:h-60">
+            {profile.images[0]?.url ? (
               <img
                 src={profile.images[0].url}
                 alt=""
                 className="rounded-full"
               />
             ) : (
-              <div>
-                <FaUser />
-              </div>
+                <FaUser className="text-8xl" />
             )}
           </div>
         </div>

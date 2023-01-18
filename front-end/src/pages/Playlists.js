@@ -29,9 +29,9 @@ const Playlists = () => {
             <Link
               key={id}
               to={`/playlist/${id}`}
-              className="bg-[rgba(256,256,256,0.07)] cursor-pointer rounded-md   px-6 py-5"
+              className="bg-[rgba(256,256,256,0.07)] flex flex-col items-center cursor-pointer rounded-md   px-6 py-5"
             >
-              <div>
+              <div className="w-[15rem] h-[15rem]">
                 {images[0]?.url ? (
                     <img src={images[0].url} alt="" className="rounded-md" />
                   ) : (
